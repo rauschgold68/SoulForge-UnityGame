@@ -2,22 +2,32 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-
     public Rigidbody2D rb;
 
+    public Animator animator;
+
+    public float speed = 3f;
+
     Vector2 movement;
+
+    float horizontalMoveX = 0f;
+    float horizontalMoveY = 0f;
 
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        horizontalMoveX = Input.GetAxisRaw("Horizontal");
+        horizontalMoveY = Input.GetAxisRaw("Vertical");
+
+        movement.x = horizontalMoveX;
+        movement.y = horizontalMoveY;
+
+        animator.SetFloat("moveSpeed", Mathf.Abs(movement.magnitude));
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
 
         // Flip nur auf der X-Achse
         if (movement.x != 0)
