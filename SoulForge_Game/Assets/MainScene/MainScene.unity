@@ -16577,7 +16577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1130179738}
   animator: {fileID: 1130179742}
-  moveSpeed: 3
+  speed: 3
 --- !u!61 &1130179740
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17396,7 +17396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1368629206}
   - component: {fileID: 1368629205}
-  - component: {fileID: 1368629204}
+  - component: {fileID: 1368629207}
   m_Layer: 0
   m_Name: lightA01
   m_TagString: Untagged
@@ -17404,23 +17404,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!111 &1368629204
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368629203}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: d36e7960b8c66aa45a6248dc4c99dbeb, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: d36e7960b8c66aa45a6248dc4c99dbeb, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!212 &1368629205
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17491,6 +17474,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1368629207
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368629203}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51e8a87d4c09bfe4e968a8efdaac9d8a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1375158095
 GameObject:
   m_ObjectHideFlags: 0
