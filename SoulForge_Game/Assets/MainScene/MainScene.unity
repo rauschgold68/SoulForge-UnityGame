@@ -6497,6 +6497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2426c95c62fd841a4d538bd72fdc39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 463725752}
   maxHealth: 100
   currentHealth: 0
 --- !u!1 &487709521
@@ -8645,6 +8646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2426c95c62fd841a4d538bd72fdc39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 526375080}
   maxHealth: 100
   currentHealth: 0
 --- !u!1 &588715253
@@ -22002,7 +22004,7 @@ Transform:
   m_GameObject: {fileID: 1130179737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.84, y: 1.19, z: 0}
+  m_LocalPosition: {x: 24.17, y: 1.46, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22969,8 +22971,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1375158099}
-  maxHealth: 2000
+  maxHealth: 20
   currentHealth: 0
+  lordDefeated: 0
 --- !u!1 &1377180639
 GameObject:
   m_ObjectHideFlags: 0
@@ -31408,7 +31411,7 @@ Transform:
   m_GameObject: {fileID: 1463176162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.84, y: 1.19, z: -10}
+  m_LocalPosition: {x: 24.17, y: 1.46, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37398,7 +37401,7 @@ Transform:
   m_GameObject: {fileID: 1965661338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.84, y: 1.19, z: -10}
+  m_LocalPosition: {x: 24.17, y: 1.46, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46451,6 +46454,7 @@ GameObject:
   - component: {fileID: 2006482534}
   - component: {fileID: 2006482535}
   - component: {fileID: 2006482536}
+  - component: {fileID: 2006482537}
   m_Layer: 6
   m_Name: wizard-fire
   m_TagString: Untagged
@@ -46612,6 +46616,21 @@ PolygonCollider2D:
       - {x: 0.13582034, y: -0.2480981}
       - {x: 0.10253407, y: -0.18363799}
   m_UseDelaunayMesh: 0
+--- !u!114 &2006482537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006482532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb854d67401f04245b06324036ee0183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2006482535}
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &2018731429
 GameObject:
   m_ObjectHideFlags: 0

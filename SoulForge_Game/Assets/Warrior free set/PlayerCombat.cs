@@ -23,9 +23,10 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             // Check if the attack button is pressed
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Attack();
+                // Play an attack animation
+                animator.SetTrigger("Attack");
                 nextAttackTime = Time.time + 1f / attackRate; // Set the next attack time
             }
         }
@@ -33,19 +34,16 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        // Play an attack animation
-        animator.SetTrigger("Attack");
-
         // Check for enemies in the attack range
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         // Damage all enemies in range
-        foreach (Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemies in hitEnemies)
         {
-            IEnemy enemyScript = enemy.GetComponent<IEnemy>();
-            if (enemyScript != null)
+            IEnemy enemy = enemies.GetComponent<IEnemy>();
+            if (enemy != null)
             {
-                enemyScript.TakeDamage(attackDamage);
+                enemy.TakeDamage(attackDamage);
             }
         }
     }
