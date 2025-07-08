@@ -2632,7 +2632,6 @@ GameObject:
   m_Component:
   - component: {fileID: 104718531}
   - component: {fileID: 104718530}
-  - component: {fileID: 104718529}
   - component: {fileID: 104718532}
   m_Layer: 0
   m_Name: lightA01 (4)
@@ -2641,23 +2640,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!111 &104718529
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104718528}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: d36e7960b8c66aa45a6248dc4c99dbeb, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: d36e7960b8c66aa45a6248dc4c99dbeb, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!212 &104718530
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6341,6 +6323,7 @@ GameObject:
   - component: {fileID: 463725751}
   - component: {fileID: 463725752}
   - component: {fileID: 463725753}
+  - component: {fileID: 463725754}
   m_Layer: 6
   m_Name: burning-ghoul 2
   m_TagString: Untagged
@@ -6502,6 +6485,20 @@ PolygonCollider2D:
       - {x: 0.145, y: -0.21}
       - {x: 0.12718076, y: -0.19495611}
   m_UseDelaunayMesh: 0
+--- !u!114 &463725754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463725749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2426c95c62fd841a4d538bd72fdc39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &487709521
 GameObject:
   m_ObjectHideFlags: 0
@@ -8474,6 +8471,7 @@ GameObject:
   - component: {fileID: 526375079}
   - component: {fileID: 526375080}
   - component: {fileID: 526375081}
+  - component: {fileID: 526375082}
   m_Layer: 6
   m_Name: burning-ghoul 1
   m_TagString: Untagged
@@ -8635,6 +8633,20 @@ PolygonCollider2D:
       - {x: 0.145, y: -0.21}
       - {x: 0.12718076, y: -0.19495611}
   m_UseDelaunayMesh: 0
+--- !u!114 &526375082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526375077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2426c95c62fd841a4d538bd72fdc39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &588715253
 GameObject:
   m_ObjectHideFlags: 0
@@ -8647,6 +8659,7 @@ GameObject:
   - component: {fileID: 588715255}
   - component: {fileID: 588715256}
   - component: {fileID: 588715257}
+  - component: {fileID: 588715258}
   m_Layer: 6
   m_Name: Golem
   m_TagString: Untagged
@@ -8805,6 +8818,21 @@ PolygonCollider2D:
       - {x: 0.06830376, y: -0.037986}
       - {x: 0.006583784, y: -0.036243044}
   m_UseDelaunayMesh: 0
+--- !u!114 &588715258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588715253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e7efa4657bbbe47be5e9a83734e78a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 588715256}
+  maxHealth: 200
+  currentHealth: 0
 --- !u!1001 &597169376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21974,7 +22002,7 @@ Transform:
   m_GameObject: {fileID: 1130179737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.78, y: 1.24, z: 0}
+  m_LocalPosition: {x: 83.84, y: 1.19, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21998,10 +22026,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1130179742}
   attackPoint: {fileID: 1446777761}
-  attackRange: 0.5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  attackRange: 0.5
+  attackDamage: 10
+  attackRate: 2
 --- !u!1001 &1154718652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22370,7 +22400,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1315592535}
   - component: {fileID: 1315592534}
-  - component: {fileID: 1315592533}
   - component: {fileID: 1315592536}
   m_Layer: 0
   m_Name: lightA01 (3)
@@ -22379,23 +22408,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!111 &1315592533
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1315592532}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: d36e7960b8c66aa45a6248dc4c99dbeb, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: d36e7960b8c66aa45a6248dc4c99dbeb, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!212 &1315592534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22784,6 +22796,7 @@ GameObject:
   - component: {fileID: 1375158096}
   - component: {fileID: 1375158099}
   - component: {fileID: 1375158100}
+  - component: {fileID: 1375158101}
   m_Layer: 6
   m_Name: LordOfDarkness
   m_TagString: Untagged
@@ -22943,6 +22956,21 @@ PolygonCollider2D:
       - {x: 0.07029758, y: -0.2903502}
       - {x: -0.024067309, y: -0.30018473}
   m_UseDelaunayMesh: 0
+--- !u!114 &1375158101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375158095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6704b04ce000f004c80351ac731393fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1375158099}
+  maxHealth: 2000
+  currentHealth: 0
 --- !u!1 &1377180639
 GameObject:
   m_ObjectHideFlags: 0
@@ -31380,7 +31408,7 @@ Transform:
   m_GameObject: {fileID: 1463176162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.78, y: 1.24, z: -10}
+  m_LocalPosition: {x: 83.84, y: 1.19, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37370,7 +37398,7 @@ Transform:
   m_GameObject: {fileID: 1965661338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.78, y: 1.24, z: -10}
+  m_LocalPosition: {x: 83.84, y: 1.19, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

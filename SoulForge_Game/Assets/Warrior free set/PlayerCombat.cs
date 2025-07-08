@@ -1,3 +1,4 @@
+using SoulForge;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -6,30 +7,46 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator; // Reference to the Animator component
 
     public Transform attackPoint; // Point from where the attack originates
+
+    public LayerMask enemyLayers; // Layer mask to identify enemy layers
+
+
+    // ---Player Parameters ---
     public float attackRange = 0.5f; // Range of the attack
-    public LayerMask enemyLayers; // Layers that represent enemies
+    public int attackDamage = 10; // Damage dealt by the attack
+    public float attackRate = 1.45f; // Attacks per second
+    float nextAttackTime = 0f; // Time when the next attack can occur
+    // -------------------------
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Time.time >= nextAttackTime)
         {
-            Attack();
+            // Check if the attack button is pressed
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate; // Set the next attack time
+            }
         }
     }
 
     void Attack()
     {
-        // Implement attack logic here
+        // Play an attack animation
         animator.SetTrigger("Attack");
 
         // Check for enemies in the attack range
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
+        // Damage all enemies in range
         foreach (Collider2D enemy in hitEnemies)
         {
-            // Here you can implement what happens to the enemy when hit
-            // For example, you could call a method on the enemy script to apply damage
-            Debug.Log("Hit " + enemy.name);
-            // enemy.GetComponent<Enemy>().TakeDamage(damageAmount); // Assuming an Enemy script exists with a TakeDamage method
+            IEnemy enemyScript = enemy.GetComponent<IEnemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage(attackDamage);
+            }
         }
     }
 
