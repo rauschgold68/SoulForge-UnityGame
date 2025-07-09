@@ -18,5 +18,14 @@ public class CardView : MonoBehaviour
         title.text = card.Title;
         description.text = card.Description;
         imageSR.sprite = card.Image;
+
+        float targetHeight = 1.25f;
+
+    
+        float spriteHeight = card.Image.bounds.size.y;
+
+    
+        float scale = targetHeight / spriteHeight;
+        imageSR.transform.localScale = new Vector3(scale, scale, 1f);
     }
 }

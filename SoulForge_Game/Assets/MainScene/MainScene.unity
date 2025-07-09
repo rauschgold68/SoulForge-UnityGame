@@ -31131,7 +31131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84731cbd48425b46ac8c584c7f8ab66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardViewPrefab: {fileID: 2144654645}
+  cardViewPrefab: {fileID: 576465325734740422, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
 --- !u!1 &1572794072
 GameObject:
   m_ObjectHideFlags: 0
@@ -31574,6 +31574,7 @@ MonoBehaviour:
   - {fileID: 51495113}
   - {fileID: 125376263}
   - {fileID: 1040357466}
+  cardPrefab: {fileID: 576465325734740422, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
 --- !u!1001 &1692421515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49773,17 +49774,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7324550561844963297, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
   m_PrefabInstance: {fileID: 2951796729282344229}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2144654645 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 576465325734740422, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
-  m_PrefabInstance: {fileID: 2951796729282344229}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c07576e8418c724e8897245884f84ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2951796729282344229
 PrefabInstance:
   m_ObjectHideFlags: 0

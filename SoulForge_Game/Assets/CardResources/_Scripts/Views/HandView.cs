@@ -6,6 +6,9 @@ using System.Collections;
 public class HandView : MonoBehaviour
 {
     [SerializeField] private Transform[] cardSlots = new Transform[3];
+
+    [SerializeField] private CardView cardPrefab;
+
     private readonly List<CardView> cards = new();
 
     public IEnumerator AddCard(CardView cardView)
@@ -30,4 +33,5 @@ public class HandView : MonoBehaviour
         yield return new WaitForSeconds(duration);
     }
 }
+
 
