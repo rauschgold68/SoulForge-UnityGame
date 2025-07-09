@@ -16,7 +16,7 @@ public class Lords_Run : StateMachineBehaviour
     private float nextAttackTime = 0f;
 
     // Offset to maintain distance from the player during attack
-    private float attackOffset = 3f;
+    private float attackOffset = 3.5f;
     
     // Random attack selection
     private int randomAttack;
@@ -66,17 +66,17 @@ public class Lords_Run : StateMachineBehaviour
         {
             if (Time.time >= nextAttackTime)
             {
-                // 0, 1, 2 = Attack1 (75%), 3 = Attack2 (25%)
+                // 0, 1, 2 = quickAttack (75%), 3 = heavyAttack (25%)
                 if (randomAttack == 3)
                 {
                     attackCooldown = 0.8f; // Set cooldown for heavy attack
-                    animator.SetTrigger("Attack2"); // Trigger the heavy attack animation
+                    animator.SetTrigger("heavyAttack"); // Trigger the heavy attack animation
                     nextAttackTime = Time.time + 1f / attackCooldown; // Set the next attack time
                 }
                 else
                 {
-                    attackCooldown = 2.0f; // Set cooldown for normal attack
-                    animator.SetTrigger("Attack1"); // Trigger the normal attack animation
+                    attackCooldown = 3.0f; // Set cooldown for normal attack
+                    animator.SetTrigger("quickAttack"); // Trigger the quick attack animation
                     nextAttackTime = Time.time + 1f / attackCooldown; // Set the next attack time
                 }
             }

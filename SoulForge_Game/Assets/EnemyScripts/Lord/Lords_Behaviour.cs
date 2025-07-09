@@ -65,8 +65,9 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
     public void Attack(String attackType)
     {
         // Quick attack logic
-        if (attackType == "QuickAttack" && attackPointQuick != null)
+        if (attackType == "Quick")
         {
+            Debug.Log("Lord of Darkness attacks with: " + attackType);
             // Check for players in the quick attack range, using the playerLayer mask
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointQuick.position, attackRangeQuick, playerLayer);
             // Damage all players in range
@@ -77,8 +78,9 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
             }
         }
         // Heavy attack logic
-        else if (attackType == "HeavyAttack" && attackPointHeavy != null)
+        else if (attackType == "Heavy")
         {
+            Debug.Log("Lord of Darkness attacks with: " + attackType);
             // Check for players in the heavy attack range, using the playerLayer mask
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointHeavy.position, attackRangeHeavy, playerLayer);
             // Damage all players in range
