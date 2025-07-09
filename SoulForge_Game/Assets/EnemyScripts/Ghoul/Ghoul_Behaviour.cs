@@ -1,12 +1,12 @@
 using UnityEngine;
 using SoulForge;
 
-public class golem_Behavior : MonoBehaviour, IEnemy
+public class Ghoul_Behaviour : MonoBehaviour, IEnemy
 {
 
     public Animator animator; // Reference to the Animator component
 
-    public int maxHealth = 200;
+    public int maxHealth = 50;
     public int currentHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,6 +15,7 @@ public class golem_Behavior : MonoBehaviour, IEnemy
         currentHealth = maxHealth;
     }
 
+    
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -29,7 +30,7 @@ public class golem_Behavior : MonoBehaviour, IEnemy
 
     void Die()
     {
-        Debug.Log("Golem has died.");
+        Debug.Log("Ghoul has died.");
 
         animator.SetBool("IsDead", true); // Set the IsDead parameter to true in the Animator
 
