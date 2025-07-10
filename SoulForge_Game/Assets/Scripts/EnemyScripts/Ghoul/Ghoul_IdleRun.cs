@@ -10,7 +10,7 @@ public class Ghoul_IdleRun : StateMachineBehaviour
     private float attackCooldown = 0.5f; // Cooldown between attacks in seconds
     public int attackDamage = 10; // Damage dealt to the player on contact
     private int speed = 2; // Speed at which the Ghoul moves towards the player
-    private float chaseDistance = 7f; // Distance at which the Ghoul starts chasing the player
+    private float chaseDistance = 5.5f; // Distance at which the Ghoul starts chasing the player
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
