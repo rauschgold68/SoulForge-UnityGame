@@ -130,19 +130,17 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
 
     public void LookAtPlayer()
     {
-        animator.GetComponent<SpriteRenderer>().flipX = isFlipped;
-
-        if (transform.position.x < player.position.x && isFlipped)
+        // Determine direction to player
+        float direction = player.position.x - transform.position.x;
+        if (direction != 0)
         {
-            isFlipped = false; // Set the flip state
-        }
-        else if (transform.position.x > player.position.x && !isFlipped)
-        {
-            isFlipped = true; // Set the flip state
+            // Invert the direction for flipping if your sprite faces left by default
+            Vector3 scale = transform.localScale;
+            scale.x = -Mathf.Sign(direction) * Mathf.Abs(scale.x);
+            transform.localScale = scale;
         }
     }
-
-        void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         // Draw a sphere in the editor to visualize the attack range
         if (attackPointQuick && attackPointHeavy != null)

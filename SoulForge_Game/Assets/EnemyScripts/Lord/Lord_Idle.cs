@@ -2,23 +2,26 @@ using UnityEngine;
 
 public class Lord_Idle : StateMachineBehaviour
 {
-    // Called on each Update frame while in the Idle state
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Get reference to the player and this enemy's Rigidbody2D
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-        Rigidbody2D lordsBody = animator.GetComponent<Rigidbody2D>();
-        float chaseDistance = 7f; // Distance at which the Lord starts chasing the player
-
-        // Calculate horizontal distance to the player
-        float distanceToPlayer = Mathf.Abs(player.position.x - lordsBody.position.x);
-
-        // If the player is within chase distance, trigger the Run state
-        if (distanceToPlayer < chaseDistance)
+        var playerComponent = player.GetComponent<IPlayer>();
+        if (playerComponent != null && playerComponent.GetCurrentHealth() > 0)
         {
-            animator.SetTrigger("Run");
+            Rigidbody2D lordsBody = animator.GetComponent<Rigidbody2D>();
+            float chaseDistance = 7f; // Distance at which the Lord starts chasing the player
+
+            // Calculate horizontal distance to the player
+            float distanceToPlayer = Mathf.Abs(player.position.x - lordsBody.position.x);
+
+            // If the player is within chase distance, trigger the Run state
+            if (distanceToPlayer < chaseDistance)
+            {
+                animator.SetTrigger("Run");
+            }
+            // Otherwise, remain in Idle
         }
-        // Otherwise, remain in Idle
     }
 
     // The following methods are available for further state handling if needed:

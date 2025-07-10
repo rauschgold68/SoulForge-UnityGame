@@ -6,8 +6,8 @@ public class PlayerHealth : MonoBehaviour, IPlayer
 
 
     // --- Player Health Parameters ---
-    public int maxHealth = 100;
-    public int currentHealth;
+    private int maxHealth = 100;
+    private int currentHealth;
 
     private void Start()
     {
@@ -51,5 +51,10 @@ public class PlayerHealth : MonoBehaviour, IPlayer
         GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
 
         // TODO: Add game over logic, such as restarting the level and showing a game over screen
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 }

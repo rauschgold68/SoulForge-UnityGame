@@ -6,9 +6,6 @@ public class Lords_Run : StateMachineBehaviour
     // Speed at which the Lord moves towards the player
     private float speed = 2f;
 
-    // Range within which the Lord can attack the player
-    private float attackRange = 1.5f;
-
     // Cooldown time between attacks (set dynamically)
     private float attackCooldown;
 
@@ -24,19 +21,25 @@ public class Lords_Run : StateMachineBehaviour
     Transform player;
     Rigidbody2D lordsBody;
     Lords_Behaviour lords_Behavior;
+    IPlayer playerComponent;
 
     // Called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Get references to player, Rigidbody2D, and Lord's behaviour script
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerComponent = player.GetComponent<IPlayer>();
         lordsBody = animator.GetComponent<Rigidbody2D>();
+        lords_Behavior = animator.GetComponent<Lords_Behaviour>();
         lords_Behavior = animator.GetComponent<Lords_Behaviour>();
     }
 
     // Called on each Update frame while in the Run state
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (playerComponent != null && playerComponent.GetCurrentHealth() <= 0)
+        {
+            animator.SetTrigger("Idle"); // Transition to Idle state if player is dead
+        }
         // Randomly select an attack type for variety
         int v = Random.Range(0, 4); // 0, 1, 2, or 3 (inclusive lower, exclusive upper)
         randomAttack = v; 

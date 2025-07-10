@@ -21854,6 +21854,7 @@ GameObject:
   - component: {fileID: 1130179739}
   - component: {fileID: 1130179738}
   - component: {fileID: 1130179745}
+  - component: {fileID: 1130179746}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -22065,6 +22066,21 @@ MonoBehaviour:
   attackRange: 0.5
   attackDamage: 10
   attackRate: 2
+--- !u!114 &1130179746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130179737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66a4c3dcfe8b3646ac3dcf3039c0f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1130179742}
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1001 &1154718652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23007,7 +23023,7 @@ MonoBehaviour:
   animator: {fileID: 1375158099}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   player: {fileID: 1130179744}
   attackPointQuick: {fileID: 1853537528}
   attackPointHeavy: {fileID: 54907988}

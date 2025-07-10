@@ -4,4 +4,5 @@ public interface IPlayer
     void Die();
     void Heal(int healAmount);
     int lifeSteal(int damage);
+    int GetCurrentHealth();
 }
