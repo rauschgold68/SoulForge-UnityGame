@@ -32,52 +32,72 @@ public class CardGameManager : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            handView.ClearHand();
-            StartCoroutine(SpawnThreeRandomCards());
-        }
+{
+    // Entferne oder kommentiere diese Zeile:
+    // if (Input.GetKeyDown(KeyCode.Space))
+    // {
+    //     handView.ClearHand();
+    //     StartCoroutine(SpawnThreeRandomCardsWithLock());
+    // }
 
-        if (Input.GetMouseButtonDown(0))
+    if (Input.GetMouseButtonDown(0))
+    {
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        if (hit.collider != null)
         {
-            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
-            if (hit.collider != null)
+            var cardView = hit.collider.GetComponent<CardView>();
+            if (cardView != null)
             {
-                var cardView = hit.collider.GetComponent<CardView>();
-                if (cardView != null)
-                {
-                    cardView.OnClickedByManager();
-                }
+                cardView.OnClickedByManager();
             }
         }
     }
+}
 
-    private IEnumerator SpawnThreeRandomCards()
+
+    public void TriggerCardChoice(PlayerMovement player)
+{
+    StartCoroutine(SpawnThreeRandomCardsWithLock(player));
+}
+
+private IEnumerator SpawnThreeRandomCardsWithLock(PlayerMovement player)
+{
+    player.SetMovementEnabled(false);
+    handView.ClearHand();
+
+    int cardsToDraw = Mathf.Min(3, availableCards.Count);
+    float spacing = 4f; // Abstand zwischen Karten (anpassen!)
+    
+    Vector3 cameraCenter = Camera.main.transform.position;
+    Vector3 spawnCenter = new Vector3(cameraCenter.x, cameraCenter.y, 0f); // Z = 0 oder -1
+
+    // Berechne X-Offsets, damit sie zentriert erscheinen
+    float totalWidth = spacing * (cardsToDraw - 1);
+    float startX = spawnCenter.x - totalWidth / 2;
+
+    for (int i = 0; i < cardsToDraw; i++)
     {
-        int cardsToDraw = Mathf.Min(3, availableCards.Count);
+        Card randomCard = GetRandomCardByRarity();
+        if (randomCard == null) yield break;
 
-        for (int i = 0; i < cardsToDraw; i++)
-        {
-            Card randomCard = GetRandomCardByRarity();
-            if (randomCard == null)
-            {
-                Debug.LogWarning("Keine Karten zum Ziehen verfügbar!");
-                yield break;
-            }
+        availableCards.Remove(randomCard);
 
-            availableCards.Remove(randomCard);
+        // Position für jede Karte
+        Vector3 spawnPos = new Vector3(startX + i * spacing, spawnCenter.y, -1f); // Z = -1 damit sichtbar
+        CardView cardView = Instantiate(cardPrefab, spawnPos, Quaternion.identity);
+        
+        cardView.Setup(randomCard, player);
+        cardView.HandView = handView;
+        cardView.GameManager = this;
 
-            CardView cardView = Instantiate(cardPrefab, cardSpawnPoint.position, Quaternion.identity);
-            cardView.Setup(randomCard);
-            cardView.HandView = handView;
-            cardView.GameManager = this;
-
-            yield return StartCoroutine(handView.AddCard(cardView));
-            yield return new WaitForSeconds(0.1f);
-        }
+        yield return StartCoroutine(handView.AddCard(cardView));
+        yield return new WaitForSeconds(0.1f);
     }
+}
+
+
+
 
     private Card GetRandomCardByRarity()
     {

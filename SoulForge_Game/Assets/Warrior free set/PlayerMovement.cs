@@ -3,19 +3,23 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
-
     public Animator animator;
-
     public float speed = 3f;
 
-    Vector2 movement;
+    private Vector2 movement;
+    private float horizontalMoveX = 0f;
+    private float horizontalMoveY = 0f;
+    private bool movementEnabled = true;
 
-    float horizontalMoveX = 0f;
-    float horizontalMoveY = 0f;
+    public void SetMovementEnabled(bool enabled)
+    {
+        movementEnabled = enabled;
+    }
 
-    // Update is called once per frame
     void Update()
     {
+        if (!movementEnabled) return;
+
         horizontalMoveX = Input.GetAxisRaw("Horizontal");
         horizontalMoveY = Input.GetAxisRaw("Vertical");
 
@@ -27,9 +31,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!movementEnabled) return;
+
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
 
-        // Flip nur auf der X-Achse
         if (movement.x != 0)
         {
             Vector3 scale = transform.localScale;

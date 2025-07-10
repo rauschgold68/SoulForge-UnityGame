@@ -23,14 +23,22 @@ public class HandView : MonoBehaviour
     }
 
     private IEnumerator UpdateCardPosition(float duration)
+{
+    float spacing = 4f; // Abstand zwischen Karten
+    Vector3 cameraCenter = Camera.main.transform.position;
+    Vector3 basePos = new Vector3(cameraCenter.x, cameraCenter.y, 0f);
+    float startX = basePos.x - (spacing * (cards.Count - 1)) / 2f;
+
+    for (int i = 0; i < cards.Count; i++)
     {
-        for (int i = 0; i < cards.Count; i++)
-        {
-            cards[i].transform.DOMove(cardSlots[i].position, duration);
-            cards[i].transform.DORotate(cardSlots[i].rotation.eulerAngles, duration);
-        }
-        yield return new WaitForSeconds(duration);
+        Vector3 targetPos = new Vector3(startX + i * spacing, basePos.y, -1f);
+        cards[i].transform.DOMove(targetPos, duration);
+        cards[i].transform.DORotate(Vector3.zero, duration); // Optional: Karten gerade ausrichten
     }
+
+    yield return new WaitForSeconds(duration);
+}
+
 
     public void ClearHand()
     {

@@ -15,23 +15,30 @@ public class CardView : MonoBehaviour
 
     private Vector3 originalScale;
 
+    private PlayerMovement playerController;
+
+
     private void Awake()
     {
         originalScale = transform.localScale;
     }
 
-    public void Setup(Card card)
-    {
-        Card = card;
-        title.text = card.Title;
-        description.text = card.Description;
-        imageSR.sprite = card.Image;
+    public void Setup(Card card, PlayerMovement player = null)
+{
+    Card = card;
+    title.text = card.Title;
+    description.text = card.Description;
+    imageSR.sprite = card.Image;
 
-        float targetHeight = 1.25f;
-        float spriteHeight = card.Image.bounds.size.y;
-        float scale = targetHeight / spriteHeight;
-        imageSR.transform.localScale = new Vector3(scale, scale, 1f);
-    }
+    float targetHeight = 1.25f;
+    float spriteHeight = card.Image.bounds.size.y;
+    float scale = targetHeight / spriteHeight;
+    imageSR.transform.localScale = new Vector3(scale, scale, 1f);
+
+    playerController = player; // <- damit `ScaleUpAndDisappear()` den Spieler wieder freigeben kann
+}
+
+
 
     public void OnClickedByManager()
 {
@@ -55,5 +62,11 @@ public class CardView : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         yield return transform.DOScale(0f, 0.5f).WaitForCompletion();
         gameObject.SetActive(false);
+        if (playerController != null)
+{
+    playerController.SetMovementEnabled(true); // <-- funktioniert nur, wenn es diese Methode gibt
+}
+
+
     }
 }
