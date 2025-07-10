@@ -31523,6 +31523,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfa0a5ef94fb05d4f97d095a05dc55c5, type: 3}
+--- !u!1 &1647555660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1647555661}
+  - component: {fileID: 1647555662}
+  m_Layer: 0
+  m_Name: CardGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1647555661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647555660}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1791013055}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1647555662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647555660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6467a4b173ee50f4a96525e0205e79f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handView: {fileID: 1662654184}
+  cardPrefab: {fileID: 576465325734740422, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
+  cardSpawnPoint: {fileID: 51495113}
 --- !u!1 &1662654182
 GameObject:
   m_ObjectHideFlags: 0
@@ -31836,6 +31883,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1550296592}
+  - {fileID: 1647555661}
   m_Father: {fileID: 890815390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1806619911
@@ -49804,15 +49852,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2876868725122070232, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775042668152312212, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5317347031993644268, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6990535621438424360, guid: ab5c8d576f8287e43bd97ee45d4cb3f6, type: 3}
       propertyPath: m_Sprite

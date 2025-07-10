@@ -32,6 +32,16 @@ public class HandView : MonoBehaviour
         }
         yield return new WaitForSeconds(duration);
     }
+
+    public void ClearHand()
+{
+    foreach (var card in cards)
+    {
+        Destroy(card.gameObject);
+    }
+    cards.Clear();
+}
+
 }
 
 
