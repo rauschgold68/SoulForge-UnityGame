@@ -11,7 +11,7 @@ public class Golem_Idle : StateMachineBehaviour
         if (playerComponent != null && playerComponent.GetCurrentHealth() > 0)
         {
             Rigidbody2D golemBody = animator.GetComponent<Rigidbody2D>();
-            float chaseDistance = 5f; // Distance at which the Golem starts chasing the player
+            float chaseDistance = 10f; // Distance at which the Golem starts chasing the player
 
             // Calculate horizontal distance to the player
             float distanceToPlayer = Mathf.Abs(player.position.x - golemBody.position.x);
