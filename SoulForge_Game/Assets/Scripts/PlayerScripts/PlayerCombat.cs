@@ -3,20 +3,38 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-
     public Animator animator; // Reference to the Animator component
 
     public Transform attackPoint; // Point from where the attack originates
+    public Transform attackPointFirstUpgrade; // Point for the first upgrade attack
+    public Transform attackPointSecondUpgrade; // Point for the second upgrade attack
+    public Transform attackPointThirdUpgrade; // Point for the third upgrade attack
 
     public LayerMask enemyLayers; // Layer mask to identify enemy layers
 
+    public CardController cardController; // Assign in Inspector or via code
 
     // ---Player Parameters ---
+    // All fields are now private and not visible/editable in the Inspector
     public float attackRange = 0.5f; // Range of the attack
+    public float attackRangeDefault = 0.5f; // Range of the default attack
+    public float attackRangeFirstUpgrade = 1f; // Range of the first upgrade attack
+    public float attackRangeSecondUpgrade = 1.7f; // Range of the second upgrade attack
+    public float attackRangeThirdUpgrade = 2.5f; // Range of the third upgrade attack
+
     public int attackDamage = 10; // Damage dealt by the attack
     public float attackRate = 1.45f; // Attacks per second
-    float nextAttackTime = 0f; // Time when the next attack can occur
+    public float nextAttackTime = 0f; // Time when the next attack can occur
+
+    private bool lifeStealEnabled = false; // Flag to enable/disable life steal
     // -------------------------
+
+    void Start()
+    {
+        // Try to auto-assign CardController if not set
+        if (cardController == null)
+            cardController = FindAnyObjectByType<CardController>();
+    }
 
     void Update()
     {
@@ -32,16 +50,45 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    void LifeSteal(bool isEnabled = true, int upgradeStage = 0)
+    {
+        if (!isEnabled) return;
+
+        // Implement life steal logic here
+    }
+
     void Attack()
     {
-        // Check for enemies in the attack range
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        // Damage all enemies in range
-        foreach (Collider2D enemies in hitEnemies)
+        Collider2D[] hitEnemies = null;
+        string upgradeStage = cardController != null ? cardController.GetRangeUpgradeStage() : "Default";
+        if (upgradeStage == "Default" && attackPoint != null)
         {
-            IEnemy enemy = enemies.GetComponent<IEnemy>();
-            enemy?.TakeDamage(attackDamage);
+            hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRangeDefault, enemyLayers);
+        }
+        else if (upgradeStage == "FirstUpgrade" && attackPointFirstUpgrade != null)
+        {
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointFirstUpgrade.position, attackRangeFirstUpgrade, enemyLayers);
+        }
+        else if (upgradeStage == "SecondUpgrade" && attackPointSecondUpgrade != null)
+        {
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointSecondUpgrade.position, attackRangeSecondUpgrade, enemyLayers);
+        }
+        else if (upgradeStage == "ThirdUpgrade" && attackPointThirdUpgrade != null)
+        {
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointThirdUpgrade.position, attackRangeThirdUpgrade, enemyLayers);
+        }
+        else if (attackPoint != null)
+        {
+            hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        }
+        // Damage all enemies in range
+        if (hitEnemies != null)
+        {
+            foreach (Collider2D enemies in hitEnemies)
+            {
+                IEnemy enemy = enemies.GetComponent<IEnemy>();
+                enemy?.TakeDamage(attackDamage);
+            }
         }
     }
 
@@ -51,7 +98,13 @@ public class PlayerCombat : MonoBehaviour
         if (attackPoint != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            Gizmos.DrawWireSphere(attackPoint.position, 0.5f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(attackPointFirstUpgrade.position, 1f);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(attackPointSecondUpgrade.position, 1.7f);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(attackPointThirdUpgrade.position, 2.5f);
         }
     }
 }
