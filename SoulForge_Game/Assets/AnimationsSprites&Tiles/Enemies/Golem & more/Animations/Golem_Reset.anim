@@ -34,6 +34,8 @@ AnimationClip:
       value: {fileID: -6211827338972337257, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - time: 1
       value: {fileID: -2068219842928820236, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
+    - time: 1.1666666
+      value: {fileID: -267057867954128757, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -63,12 +65,13 @@ AnimationClip:
     - {fileID: 6004110841436553050, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - {fileID: -6211827338972337257, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - {fileID: -2068219842928820236, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
+    - {fileID: -267057867954128757, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1666666
+    m_StopTime: 1.3333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -87,4 +90,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.6666667
+    functionName: TriggerStoneRegen
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour, IPlayer
 
 
     // --- Player Health Parameters ---
-    private int maxHealth = 100;
+    private int maxHealth = 120;
     private int currentHealth;
 
     private void Start()
