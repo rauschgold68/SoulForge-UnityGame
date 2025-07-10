@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HealthCard1
   m_EditorClassIdentifier: 
   Description: Grants +1 HP.
-  Image: {fileID: 21300000, guid: 58b209c0f212f2049b6f299bc841d5f1, type: 3}
+  Image: {fileID: 21300000, guid: 83669ad259d236b43be9d27ce056b9b0, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RangeCard1
   m_EditorClassIdentifier: 
   Description: Grants +1 Attack Range.
-  Image: {fileID: 21300000, guid: 00ea416edef9a924b8ca5a70102b66fc, type: 3}
+  Image: {fileID: 21300000, guid: e19cf3de9c1f64c4f953eaa991a4db9e, type: 3}

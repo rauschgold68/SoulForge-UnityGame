@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpeedCard1
   m_EditorClassIdentifier: 
   Description: Grants +1 Movement Speed.
-  Image: {fileID: 21300000, guid: 09b57954bfb659442adb536a6770adf1, type: 3}
+  Image: {fileID: 21300000, guid: f58d95917c7d7af48bc6cd7cd7e4152b, type: 3}

@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaa6ed4b9eb5df040aedd4ad782c311f, type: 3}
-  m_Name: SpeedCard3
+  m_Name: HealthCardCommon
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: d570ecb9a42395d4db642baaa4bf40d6, type: 2}

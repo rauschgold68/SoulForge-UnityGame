@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaa6ed4b9eb5df040aedd4ad782c311f, type: 3}
-  m_Name: DamageCard2
+  m_Name: HealthCardEpic
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: ff0e170cc01559541b60d50a72a5afae, type: 2}
+  data: {fileID: 11400000, guid: d9fbad7aca94424419a1e29798e827f8, type: 2}
