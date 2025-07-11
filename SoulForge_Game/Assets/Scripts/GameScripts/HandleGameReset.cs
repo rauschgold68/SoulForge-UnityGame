@@ -70,6 +70,10 @@ public class HandleGameReset : MonoBehaviour
             health.animator.SetBool("IsDead", false);
             var collider = health.GetComponent<Collider2D>();
             if (collider != null) collider.enabled = true;
+            var move = health.GetComponent<PlayerMovement>();
+            if (move != null) move.enabled = true;
+            var combat = health.GetComponent<PlayerCombat>();
+            if (combat != null) combat.enabled = true;
             // Add more revive logic as needed
         }
     }

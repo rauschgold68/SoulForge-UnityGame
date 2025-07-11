@@ -61,10 +61,11 @@ public class PlayerHealth : MonoBehaviour, IPlayer
     {
         Debug.Log("Player has died. Game Over!");
         animator.SetBool("IsDead", true); // Set the IsDead parameter in the Animator to trigger death animation
-
-        // Disable player controls or trigger game over logic
         GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
-
+        var move = GetComponent<PlayerMovement>();
+        if (move != null) move.enabled = false;
+        var combat = GetComponent<PlayerCombat>();
+        if (combat != null) combat.enabled = false;
         // TODO: Add game over logic, such as restarting the level and showing a game over screen
     }
 
