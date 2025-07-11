@@ -24514,6 +24514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1130179742}
   gameOverScreen: {fileID: 299531290}
+  victoryScreen: {fileID: 504049650}
 --- !u!114 &1130179747
 MonoBehaviour:
   m_ObjectHideFlags: 0

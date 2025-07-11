@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour, IPlayer
 
     [SerializeField] public GameObject gameOverScreen;
 
+    [SerializeField] public GameObject victoryScreen;
 
     public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     public int CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
