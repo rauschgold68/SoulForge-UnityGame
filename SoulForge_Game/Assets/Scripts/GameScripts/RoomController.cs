@@ -1,45 +1,89 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+
 
 public class RoomController : MonoBehaviour
 {
-    // Assign these in the Inspector or via code
     public List<Ghoul_Behaviour> room1Ghouls;
     public Wizard_Behavior room1Wizard;
     public Golem_Behaviour room2Golem;
 
-    public enum RoomLog { None, Room1Cleared, Room2Cleared }
+    public GameObject room1Door; // <-- Referenz zur Tür (optional: separate für "Tür zu" und "Tür auf")
+    public GameObject room2Door;
+
+    public GameObject room3Door;
+
+    [SerializeField] private CardGameManager cardGameManager;
+    [SerializeField] private PlayerMovement player; // Direkt gesetzt oder per Find
 
     private bool room1AlreadyCleared = false;
     private bool room2AlreadyCleared = false;
 
     void Update()
     {
-        // Check Room 1
+        // Raum 1 prüfen
         if (!room1AlreadyCleared)
         {
-            bool room1Cleared = true;
+            bool cleared = true;
             foreach (var ghoul in room1Ghouls)
-                if (ghoul != null && ghoul.currentHealth > 0) room1Cleared = false;
-            if (room1Wizard != null && room1Wizard.currentHealth > 0) room1Cleared = false;
-            if (room1Cleared)
+                if (ghoul != null && ghoul.currentHealth > 0) cleared = false;
+            if (room1Wizard != null && room1Wizard.currentHealth > 0) cleared = false;
+
+            if (cleared)
             {
                 room1AlreadyCleared = true;
-                Debug.Log("Room1Cleared!");
-                // TODO: open door 1
+                Debug.Log("Room 1 Cleared!");
+
+                StartCoroutine(ShowCardsAfterDelay(1f, () =>
+                {
+                    cardGameManager.TriggerCardChoice(player, onFinish: () =>
+                    {
+                        OpenDoor(room2Door);
+                    });
+                }));
             }
+
         }
-        // Check Room 2
+
+        // Raum 2 prüfen
         if (!room2AlreadyCleared)
         {
-            bool room2Cleared = true;
-            if (room2Golem != null && room2Golem.currentHealth > 0) room2Cleared = false;
-            if (room2Cleared)
+            bool cleared = (room2Golem == null || room2Golem.currentHealth <= 0);
+
+            if (cleared)
             {
                 room2AlreadyCleared = true;
-                Debug.Log("Room2Cleared!");
-                // TODO: open door 2
+                Debug.Log("Room 2 Cleared!");
+
+                StartCoroutine(ShowCardsAfterDelay(1f, () =>
+                {
+                    cardGameManager.TriggerCardChoice(player, onFinish: () =>
+                    {
+                        OpenDoor(room3Door);
+                    });
+                }));
             }
+
         }
     }
+
+    private void OpenDoor(GameObject door)
+    {
+        if (door != null) door.SetActive(false);
+    }
+
+    private void CloseDoor(GameObject door)
+    {
+        if (door != null) door.SetActive(true);
+    }
+    
+    private IEnumerator ShowCardsAfterDelay(float delaySeconds, System.Action callback)
+{
+    yield return new WaitForSeconds(delaySeconds);
+    callback?.Invoke();
+}
+
+
+
 }
