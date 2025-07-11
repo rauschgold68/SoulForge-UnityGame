@@ -50,6 +50,8 @@ public class HandleGameReset : MonoBehaviour
         if (roomController != null)
             roomController.ResetRoomStates();
         ResetAllRoomTriggers();
+        if (playerStatController?.playerHealth?.gameOverScreen != null)
+        playerStatController.playerHealth.gameOverScreen.SetActive(false);
     }
 
     public void ResetPlayerPosition()
@@ -84,6 +86,9 @@ public class HandleGameReset : MonoBehaviour
             if (move != null) move.enabled = true;
             var combat = health.GetComponent<PlayerCombat>();
             if (combat != null) combat.enabled = true;
+
+            if (health.gameOverScreen != null)
+            health.gameOverScreen.SetActive(false);
             // Add more revive logic as needed
         }
     }
