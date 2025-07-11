@@ -5,6 +5,8 @@ using System;
 public class Lords_Behaviour : MonoBehaviour, IEnemy
 {
 
+[SerializeField] private GameObject victoryScreen;
+
     public Animator animator; // Reference to the Animator component
     public LayerMask playerLayer; // Layer mask to identify player layers
     public Transform player; // Reference to the player transform
@@ -13,7 +15,7 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
     public bool isFlipped = false; // Flag to check if the enemy is flipped
     public Vector3 starterScale; // Scale to flip the enemy back to the original side
 
-    private int maxHealth = 2000;
+    private int maxHealth = 1;
     public int currentHealth;
     public int quickDamage = 20; // Damage dealt by the quick attack
     public int heavyDamage = 50; // Damage dealt by the heavy attack
@@ -123,11 +125,16 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
     }
 
     void Die()
-    {
-        animator.SetBool("IsDead", true); // Set the IsDead parameter to true in the Animator
+{
+    animator.SetBool("IsDead", true); // Set animation
+    GetComponent<Collider2D>().enabled = false;
 
-        GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
+    if (victoryScreen != null)
+    {
+        victoryScreen.SetActive(true); // Victory UI anzeigen
     }
+}
+
 
     public void Revive()
     {
