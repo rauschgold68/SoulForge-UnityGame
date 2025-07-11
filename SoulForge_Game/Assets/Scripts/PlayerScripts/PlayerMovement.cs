@@ -13,18 +13,10 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMoveY = 0f;
     private bool movementEnabled = true;
 
-   public void SetMovementEnabled(bool enabled)
-{
-    movementEnabled = enabled;
-
-    if (!enabled)
+    public void SetMovementEnabled(bool enabled)
     {
-        movement = Vector2.zero;
-        rb.linearVelocity = Vector2.zero;
-        animator.SetFloat("moveSpeed", 0); 
+        movementEnabled = enabled;
     }
-}
-
 
     void Update()
     {
