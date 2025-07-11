@@ -56,7 +56,7 @@ public class RoomController : MonoBehaviour
                 room2AlreadyCleared = true;
                 Debug.Log("Room 2 Cleared!");
 
-                StartCoroutine(ShowCardsAfterDelay(1f, () =>
+                StartCoroutine(ShowCardsAfterDelay(1.5f, () =>
                 {
                     cardGameManager.TriggerCardChoice(player, onFinish: () =>
                     {

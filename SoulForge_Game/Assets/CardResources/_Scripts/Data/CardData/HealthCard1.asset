@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0135f0df876669449b1bea18020d175, type: 3}
   m_Name: HealthCard1
   m_EditorClassIdentifier: 
-  Description: Grants +1 HP.
+  Description: Grants +50 maximum HP.
   Image: {fileID: 21300000, guid: 83669ad259d236b43be9d27ce056b9b0, type: 3}
