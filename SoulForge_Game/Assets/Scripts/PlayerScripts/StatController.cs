@@ -109,6 +109,43 @@ public class StatController : MonoBehaviour
         if (playerMovement != null) playerMovement.speed = moveSpeed;
     }
 
+    public void AddMaxHealth(int amount)
+    {
+        maxHealth = Mathf.Max(1, maxHealth + amount);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (playerHealth != null)
+        {
+            playerHealth.maxHealth = maxHealth;
+            playerHealth.currentHealth = currentHealth;
+        }
+    }
+
+    public void AddCurrentHealth(int amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        if (playerHealth != null)
+        {
+            playerHealth.currentHealth = currentHealth;
+        }
+    }
+
+    public void EnableLifeSteal(string upgradeStage)
+    {
+        if (playerCombat != null)
+        {
+            playerCombat.lifeStealEnabled = true;
+            playerCombat.lifeStealUpgradeStage = upgradeStage;
+        }
+    }
+
+    public void AddAttackSpeed(float amount)
+    {
+        if (playerCombat != null)
+        {
+            playerCombat.attackRate = Mathf.Max(0.1f, playerCombat.attackRate + amount);
+        }
+    }
+
     public bool IsAlive() => currentHealth > 0;
     public float GetHealthPercent() => (float)currentHealth / maxHealth;
 }

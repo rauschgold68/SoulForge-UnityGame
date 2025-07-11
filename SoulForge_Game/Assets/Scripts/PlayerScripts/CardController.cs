@@ -1,11 +1,30 @@
 using SoulForge;
 using UnityEngine;
 
+/// <summary>
+/// CardController manages all card-based upgrades for the player.
+/// 
+/// Usage:
+/// - Attach this script to the player or a persistent upgrade manager.
+/// - Call the provided Add*Upgrade methods to apply stat upgrades when a card is collected or activated.
+/// - The upgrade stage is tracked and can be queried for context-sensitive logic.
+/// 
+/// Example:
+///     cardController.AddDamageUpgrade("FirstUpgrade");
+///     cardController.AddAttackRangeUpgrade("SecondUpgrade");
+/// </summary>
 public class CardController : StatController
 {
+    /// <summary>
+    /// Tracks the current attack range upgrade stage.
+    /// </summary>
     public string rangeUpgradeStage = "Default";
 
-    public void SetAttackRangeUpgrade(string upgradeType)
+    /// <summary>
+    /// Upgrades the player's attack range based on the given upgrade type.
+    /// </summary>
+    /// <param name="upgradeType">Upgrade stage identifier (e.g. "FirstUpgrade")</param>
+    public void AddAttackRangeUpgrade(string upgradeType)
     {
         switch (upgradeType)
         {
@@ -27,26 +46,33 @@ public class CardController : StatController
         }
     }
 
+    /// <summary>
+    /// Returns the current attack range upgrade stage.
+    /// </summary>
     public string GetRangeUpgradeStage()
     {
         return rangeUpgradeStage;
     }
 
+    /// <summary>
+    /// Upgrades the player's max and current health based on the given upgrade type.
+    /// </summary>
+    /// <param name="upgradeType">Upgrade stage identifier</param>
     public void AddHealthUpgrade(string upgradeType)
     {
         switch (upgradeType)
         {
             case "FirstUpgrade":
                 AddMaxHealth(50);
-                AddcurrentHealth(50);
+                AddCurrentHealth(50);
                 break;
             case "SecondUpgrade":
                 AddMaxHealth(150);
-                AddcurrentHealth(150);
+                AddCurrentHealth(150);
                 break;
             case "ThirdUpgrade":
                 AddMaxHealth(300);
-                AddcurrentHealth(300);
+                AddCurrentHealth(300);
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type: " + upgradeType);
@@ -54,6 +80,10 @@ public class CardController : StatController
         }
     }
 
+    /// <summary>
+    /// Upgrades the player's damage based on the given upgrade type.
+    /// </summary>
+    /// <param name="upgradeType">Upgrade stage identifier</param>
     public void AddDamageUpgrade(string upgradeType)
     {
         switch (upgradeType)
@@ -73,6 +103,10 @@ public class CardController : StatController
         }
     }
 
+    /// <summary>
+    /// Upgrades the player's movement speed based on the given upgrade type.
+    /// </summary>
+    /// <param name="upgradeType">Upgrade stage identifier</param>
     public void AddSpeedUpgrade(string upgradeType)
     {
         switch (upgradeType)
@@ -92,6 +126,10 @@ public class CardController : StatController
         }
     }
 
+    /// <summary>
+    /// Upgrades the player's attack speed based on the given upgrade type.
+    /// </summary>
+    /// <param name="upgradeType">Upgrade stage identifier</param>
     public void AddAttackSpeedUpgrade(string upgradeType)
     {
         switch (upgradeType)
@@ -111,18 +149,22 @@ public class CardController : StatController
         }
     }
 
+    /// <summary>
+    /// Enables life steal for the player based on the given upgrade type.
+    /// </summary>
+    /// <param name="upgradeType">Upgrade stage identifier</param>
     public void AddLifeStealUpgrade(string upgradeType)
     {
         switch (upgradeType)
         {
             case "FirstUpgrade":
-                EnableLifeSteal(true);
+                EnableLifeSteal(upgradeType);
                 break;
             case "SecondUpgrade":
-                EnableLifeSteal(true, 1);
+                EnableLifeSteal(upgradeType);
                 break;
             case "ThirdUpgrade":
-                EnableLifeSteal(true, 2);
+                EnableLifeSteal(upgradeType);
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type: " + upgradeType);

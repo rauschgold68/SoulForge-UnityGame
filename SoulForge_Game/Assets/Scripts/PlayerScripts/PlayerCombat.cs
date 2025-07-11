@@ -26,7 +26,8 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 1.45f; // Attacks per second
     public float nextAttackTime = 0f; // Time when the next attack can occur
 
-    private bool lifeStealEnabled = false; // Flag to enable/disable life steal
+    public bool lifeStealEnabled = false; // Flag to enable/disable life steal
+    public string lifeStealUpgradeStage = "Default"; // Current upgrade stage
     // -------------------------
 
     void Start()
@@ -48,13 +49,6 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate; // Set the next attack time
             }
         }
-    }
-
-    void LifeSteal(bool isEnabled = true, int upgradeStage = 0)
-    {
-        if (!isEnabled) return;
-
-        // Implement life steal logic here
     }
 
     void Attack()
@@ -88,6 +82,8 @@ public class PlayerCombat : MonoBehaviour
             {
                 IEnemy enemy = enemies.GetComponent<IEnemy>();
                 enemy?.TakeDamage(attackDamage);
+                PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+                playerHealth?.LifeSteal(attackDamage, lifeStealEnabled, lifeStealUpgradeStage);
             }
         }
     }

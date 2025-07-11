@@ -24,13 +24,25 @@ public class PlayerHealth : MonoBehaviour, IPlayer
         }
     }
 
-    public int lifeSteal(int damage)
+    public void LifeSteal(int attackDamage, bool lifeStealEnabled, string upgradeStage)
     {
-        // TODO: Implement lifeSteal's different states
-
-        int lifeStealAmount = damage / 10; // 10% of damage dealt
+        if (!lifeStealEnabled) return;
+        int lifeStealAmount;
+        float lifeStealMultiplier = 0; // Default multiplier for life steal
+        switch (upgradeStage)
+        {
+            case "FirstUpgrade":
+                lifeStealMultiplier = 0.1f;
+                break;
+            case "SecondUpgrade":
+                lifeStealMultiplier = 0.2f;
+                break;
+            case "ThirdUpgrade":
+                lifeStealMultiplier = 0.3f;
+                break;
+        }
+        lifeStealAmount = (int)(attackDamage * lifeStealMultiplier);
         Heal(lifeStealAmount);
-        return lifeStealAmount;
     }
 
     public void Heal(int healAmount)
