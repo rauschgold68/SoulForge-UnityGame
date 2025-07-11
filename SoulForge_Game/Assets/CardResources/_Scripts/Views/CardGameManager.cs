@@ -61,7 +61,7 @@ public class CardGameManager : MonoBehaviour
     StartCoroutine(SpawnThreeRandomCardsWithLock(player));
 }
 
-private IEnumerator SpawnThreeRandomCardsWithLock(PlayerMovement player)
+private IEnumerator SpawnThreeRandomCardsWithLock(PlayerMovement player, CardTrigger trigger)
 {
     player.SetMovementEnabled(false);
     handView.ClearHand();
