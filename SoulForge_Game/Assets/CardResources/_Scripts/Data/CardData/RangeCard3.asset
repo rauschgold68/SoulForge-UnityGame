@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0135f0df876669449b1bea18020d175, type: 3}
   m_Name: RangeCard3
   m_EditorClassIdentifier: 
-  Description: Grants ginormous Attack Range.
+  Description: Grants +6 Attack Range.
   Image: {fileID: 21300000, guid: 8bce660090df9fa40ba06bd1c879004b, type: 3}

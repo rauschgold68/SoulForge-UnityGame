@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0135f0df876669449b1bea18020d175, type: 3}
   m_Name: AttSpeedCard2
   m_EditorClassIdentifier: 
-  Description: Allows you to attack very fast.
+  Description: Grants +3 Attack Speed.
   Image: {fileID: 21300000, guid: da1e4f134c633fc4e800bfe4bc31cae2, type: 3}
