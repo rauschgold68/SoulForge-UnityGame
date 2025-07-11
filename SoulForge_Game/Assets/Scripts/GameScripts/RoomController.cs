@@ -77,12 +77,22 @@ public class RoomController : MonoBehaviour
     {
         if (door != null) door.SetActive(true);
     }
-    
+
     private IEnumerator ShowCardsAfterDelay(float delaySeconds, System.Action callback)
-{
-    yield return new WaitForSeconds(delaySeconds);
-    callback?.Invoke();
-}
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        callback?.Invoke();
+    }
+
+    public void ResetRoomStates()
+    {
+        room1AlreadyCleared = false;
+        room2AlreadyCleared = false;
+
+        // Türen ggf. schließen oder öffnen (je nachdem wie es sein soll)
+        if (room1Door != null) OpenDoor(room1Door);
+        if (room2Door != null) CloseDoor(room2Door);
+    }
 
 
 

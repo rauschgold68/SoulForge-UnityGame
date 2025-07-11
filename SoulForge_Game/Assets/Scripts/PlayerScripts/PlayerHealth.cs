@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class PlayerHealth : MonoBehaviour, IPlayer
 {
@@ -9,13 +11,18 @@ public class PlayerHealth : MonoBehaviour, IPlayer
     private int _maxHealth = 120;
     private int _currentHealth;
 
+    private HandleGameReset gameResetHandler;
+
+
     public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     public int CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
 
     private void Start()
-    {
-        CurrentHealth = MaxHealth;
-    }
+{
+    CurrentHealth = MaxHealth;
+    gameResetHandler = FindFirstObjectByType<HandleGameReset>();
+}
+
 
     public void TakeDamage(int damage)
     {
@@ -58,16 +65,30 @@ public class PlayerHealth : MonoBehaviour, IPlayer
     }
 
     public void Die()
-    {
-        Debug.Log("Player has died. Game Over!");
-        animator.SetBool("IsDead", true); // Set the IsDead parameter in the Animator to trigger death animation
-        GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
-        var move = GetComponent<PlayerMovement>();
-        if (move != null) move.enabled = false;
-        var combat = GetComponent<PlayerCombat>();
-        if (combat != null) combat.enabled = false;
-        // TODO: Add game over logic, such as restarting the level and showing a game over screen
-    }
+{
+    Debug.Log("Player has died. Game Over!");
+    animator.SetBool("IsDead", true); // Death Animation
+    GetComponent<Collider2D>().enabled = false;
+
+    var move = GetComponent<PlayerMovement>();
+    if (move != null) move.enabled = false;
+
+    var combat = GetComponent<PlayerCombat>();
+    if (combat != null) combat.enabled = false;
+
+    StartCoroutine(WaitAndResetGame());
+}
+
+private IEnumerator WaitAndResetGame()
+{
+    yield return new WaitForSeconds(2f); // 2 Sekunden warten
+
+    if (gameResetHandler != null)
+        gameResetHandler.CommenceGameReset();
+    else
+        Debug.LogWarning("GameResetHandler wurde nicht gefunden!");
+}
+
 
     public int GetCurrentHealth()
     {

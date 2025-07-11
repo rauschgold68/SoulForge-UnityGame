@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RoomEntranceTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject doorToClose; // Die Tür, die geschlossen werden soll
+    [SerializeField] private GameObject doorToClose; // Zuweisung im Inspector: Door1, Door2, Door3
 
     private bool alreadyTriggered = false;
 
@@ -16,14 +16,22 @@ public class RoomEntranceTrigger : MonoBehaviour
 
             if (doorToClose != null)
             {
-                doorToClose.SetActive(true); // Tür wird aktiv → geschlossen
-                Debug.Log("Tür geschlossen!");
+                doorToClose.SetActive(true); // Tür schließen
+                Debug.Log($"{doorToClose.name} geschlossen!");
             }
+        }
+    }
 
-            // Optional: Trigger-Objekt entfernen
-            Destroy(gameObject);
+    // Wird vom GameReset aufgerufen
+    public void ResetTrigger()
+    {
+        alreadyTriggered = false;
+
+        // Nur Tür mit Name "Door1" wird geöffnet
+        if (doorToClose != null && doorToClose.name == "Door1")
+        {
+            doorToClose.SetActive(false); // Tür öffnen
+            Debug.Log("Door1 geöffnet (Reset)!");
         }
     }
 }
-
-

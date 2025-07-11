@@ -5,11 +5,17 @@ using SoulForge;
 
 public class HandleGameReset : MonoBehaviour
 {
+
+    [Header("Room Door References")]
+    public GameObject door1;
+
     [Header("Player & Enemy References")]
     public StatController playerStatController;
     public Transform playerTransform;
     public Vector3 playerStartPosition;
     public List<IEnemy> allEnemies; // Assign all enemies in the scene or find at runtime
+
+    public RoomController roomController;
 
     private Dictionary<IEnemy, Vector3> enemyStartPositions = new Dictionary<IEnemy, Vector3>();
 
@@ -40,6 +46,10 @@ public class HandleGameReset : MonoBehaviour
         RevivePlayer();
         ReviveAllEnemies();
         CullAllFireballs();
+        OpenDoor(door1);
+        if (roomController != null)
+            roomController.ResetRoomStates();
+        ResetAllRoomTriggers();
     }
 
     public void ResetPlayerPosition()
@@ -108,6 +118,13 @@ public class HandleGameReset : MonoBehaviour
         }
     }
 
+    public void OpenDoor(GameObject door)
+{
+    if (door != null)
+        door.SetActive(false); // Set inactive = Tür offen
+}
+
+
     void Update()
     {
         // For testing: Press 'R' to reset the game
@@ -116,4 +133,14 @@ public class HandleGameReset : MonoBehaviour
             CommenceGameReset();
         }
     }
+
+public void ResetAllRoomTriggers()
+{
+    var allTriggers = FindObjectsByType<RoomEntranceTrigger>(FindObjectsSortMode.None);
+    foreach (var trigger in allTriggers)
+    {
+        trigger.ResetTrigger();
+    }
+}
+
 }
