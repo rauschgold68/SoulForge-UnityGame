@@ -6604,6 +6604,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  starterScale: {x: 0, y: 0, z: 0}
 --- !u!50 &463725755
 Rigidbody2D:
   serializedVersion: 5
@@ -8791,6 +8792,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  starterScale: {x: 0, y: 0, z: 0}
 --- !u!50 &526375083
 Rigidbody2D:
   serializedVersion: 5
@@ -9014,6 +9016,8 @@ MonoBehaviour:
   currentHealth: 0
   quickDamage: 15
   heavyDamage: 35
+  starterScale: {x: 0, y: 0, z: 0}
+  isChasing: 0
 --- !u!50 &588715259
 Rigidbody2D:
   serializedVersion: 5
@@ -22249,6 +22253,9 @@ GameObject:
   - component: {fileID: 1130179738}
   - component: {fileID: 1130179745}
   - component: {fileID: 1130179746}
+  - component: {fileID: 1130179747}
+  - component: {fileID: 1130179748}
+  - component: {fileID: 1130179749}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -22297,7 +22304,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1130179738}
   animator: {fileID: 1130179742}
-  speed: 3
 --- !u!61 &1130179740
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22457,9 +22463,15 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
-  attackRange: 0.5
+  cardController: {fileID: 0}
+  attackRange: 1
+  attackRangeDefault: 1
+  attackRangeFirstUpgrade: 1.5
+  attackRangeSecondUpgrade: 2.5
+  attackRangeThirdUpgrade: 3.5
   attackDamage: 10
-  attackRate: 2
+  attackRate: 1.45
+  nextAttackTime: 0
 --- !u!114 &1130179746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22473,6 +22485,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1130179742}
+  maxHealth: 120
+  currentHealth: 0
+--- !u!114 &1130179747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130179737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3659c7feadf304eafabd3dd44dec36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 120
+  currentHealth: 120
+  baseDamage: 10
+  attackRange: 1.5
+  moveSpeed: 3
+  playerHealth: {fileID: 1130179746}
+  playerCombat: {fileID: 1130179745}
+  playerMovement: {fileID: 1130179739}
+--- !u!114 &1130179748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130179737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f64730a896e5d47875acd817ffee57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 120
+  currentHealth: 120
+  baseDamage: 10
+  attackRange: 1.5
+  moveSpeed: 5
+  playerHealth: {fileID: 1130179746}
+  playerCombat: {fileID: 1130179745}
+  playerMovement: {fileID: 1130179739}
+  rangeUpgradeStage: Default
 --- !u!1001 &1154718652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23420,6 +23475,7 @@ MonoBehaviour:
   attackPointQuick: {fileID: 1853537528}
   attackPointHeavy: {fileID: 54907988}
   isFlipped: 0
+  starterScale: {x: 0, y: 0, z: 0}
   currentHealth: 0
   quickDamage: 20
   heavyDamage: 50
@@ -47228,6 +47284,7 @@ MonoBehaviour:
   animator: {fileID: 2006482535}
   maxHealth: 100
   currentHealth: 0
+  starterScale: {x: 0, y: 0, z: 0}
 --- !u!114 &2006482538
 MonoBehaviour:
   m_ObjectHideFlags: 0
