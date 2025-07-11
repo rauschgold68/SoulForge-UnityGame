@@ -21,10 +21,15 @@ public class Golem_Behaviour : MonoBehaviour, IEnemy
     private float immunityTimer = 0f; // Timer for tracking immunity
     private bool isHealing = false; // True if Golem is currently healing
 
+    public Vector3 starterScale;
+
+    public bool isChasing = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentHealth = maxHealth;
+        starterScale = transform.localScale;
     }
 
     void Update()
@@ -121,11 +126,37 @@ public class Golem_Behaviour : MonoBehaviour, IEnemy
         Debug.Log("Golem has died.");
         animator.SetBool("IsDead", true); // Set the IsDead parameter to true in the Animator
         GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
-        this.enabled = false; // Disable the script to stop further updates
+    }
+
+    public void Revive()
+    {
+        Debug.Log("Golem has revived.");
+        currentHealth = maxHealth; // Reset health to max
+        animator.SetBool("IsDead", false); // Reset the IsDead parameter in the Animator
+        GetComponent<Collider2D>().enabled = true; // Re-enable the collider
+        isImmune = false; // Reset immunity state
+        isHealing = false; // Reset healing state
+        isChasing = false; // Reset aggro state
+        // Stop all movement
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+        // Flip to starter side
+        if (starterScale != Vector3.zero) transform.localScale = starterScale;
     }
 
     // Utility method for state machine to check if Golem is immune
     public bool IsImmune() { return isImmune; }
+
+    public void LookAtPlayer(Transform player)
+    {
+        float direction = player.position.x - transform.position.x;
+        if (direction != 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = -Mathf.Sign(direction) * Mathf.Abs(starterScale.x);
+            transform.localScale = scale;
+        }
+    }
 
     void OnDrawGizmosSelected()
     {

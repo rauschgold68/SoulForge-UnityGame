@@ -11,6 +11,7 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
     public Transform attackPointQuick; // Point from where the attack originates
     public Transform attackPointHeavy; // Point from where the heavy attack originates
     public bool isFlipped = false; // Flag to check if the enemy is flipped
+    public Vector3 starterScale; // Scale to flip the enemy back to the original side
 
     private int maxHealth = 2000;
     public int currentHealth;
@@ -28,6 +29,7 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
     void Start()
     {
         currentHealth = maxHealth;
+        starterScale = transform.localScale; // Initialize starterScale
     }
 
     void Update()
@@ -125,7 +127,22 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
         animator.SetBool("IsDead", true); // Set the IsDead parameter to true in the Animator
 
         GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
-        this.enabled = false; // Disable the script to stop further updates
+    }
+
+    public void Revive()
+    {
+        Debug.Log("Lord of Darkness has revived.");
+        currentHealth = maxHealth; // Reset health to max
+        animator.SetBool("IsDead", false); // Reset the IsDead parameter in the Animator
+        GetComponent<Collider2D>().enabled = true; // Re-enable the collider
+        isImmune = false; // Reset immunity state
+        lordDefeated = false; // Reset the defeated state
+        // Stop all movement
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+        // Flip to starter side
+        if (starterScale != Vector3.zero) transform.localScale = starterScale;
+        // Reset aggro/target here if needed
     }
 
     public void LookAtPlayer()
