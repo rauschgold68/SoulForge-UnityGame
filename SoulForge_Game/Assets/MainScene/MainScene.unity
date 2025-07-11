@@ -22263,6 +22263,7 @@ GameObject:
   - component: {fileID: 1130179746}
   - component: {fileID: 1130179747}
   - component: {fileID: 1130179748}
+  - component: {fileID: 1130179749}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -22474,14 +22475,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cardController: {fileID: 0}
-  attackRange: 1
-  attackRangeDefault: 1
-  attackRangeFirstUpgrade: 1.5
-  attackRangeSecondUpgrade: 2.5
-  attackRangeThirdUpgrade: 3.5
-  attackDamage: 10
-  attackRate: 1.45
-  nextAttackTime: 0
 --- !u!114 &1130179746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22495,8 +22488,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1130179742}
-  maxHealth: 120
-  currentHealth: 0
 --- !u!114 &1130179747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22509,11 +22500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3659c7feadf304eafabd3dd44dec36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
-  currentHealth: 120
-  baseDamage: 10
-  attackRange: 1.5
-  moveSpeed: 3
   playerHealth: {fileID: 1130179746}
   playerCombat: {fileID: 1130179745}
   playerMovement: {fileID: 1130179739}
@@ -22529,15 +22515,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f64730a896e5d47875acd817ffee57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
-  currentHealth: 120
-  baseDamage: 10
-  attackRange: 1.5
-  moveSpeed: 5
   playerHealth: {fileID: 1130179746}
   playerCombat: {fileID: 1130179745}
   playerMovement: {fileID: 1130179739}
-  rangeUpgradeStage: Default
+--- !u!114 &1130179749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130179737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574b67861c235284890876a2a6e5308c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatController: {fileID: 1130179747}
+  playerTransform: {fileID: 1130179744}
+  playerStartPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1154718652
 PrefabInstance:
   m_ObjectHideFlags: 0
