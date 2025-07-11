@@ -33,23 +33,22 @@ public class Golem_Run : StateMachineBehaviour
     // Called on each Update frame while in the Run state
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // If player is dead, transition to Idle
         if (playerComponent != null && playerComponent.GetCurrentHealth() <= 0)
         {
             animator.SetTrigger("Idle");
             return;
         }
-
-        // Make the Golem face the player
-        float direction = player.position.x - golemBody.position.x;
-        if (direction != 0)
+        var golem = animator.GetComponent<Golem_Behaviour>();
+        if (!golem.isChasing)
         {
-            Vector3 scale = golemBody.transform.localScale;
-            scale.x = -Mathf.Sign(direction) * Mathf.Abs(scale.x);
-            golemBody.transform.localScale = scale;
+            animator.SetTrigger("Idle");
+            return;
         }
+        // Make the Golem face the player
+        golem.LookAtPlayer(player);
 
         // Calculate direction and distance to the player
+        float direction = player.position.x - golemBody.position.x;
         float absDirection = Mathf.Sign(direction);
         float distanceToPlayer = Mathf.Abs(player.position.x - golemBody.position.x);
 

@@ -8,10 +8,15 @@ public class Wizard_Behavior : MonoBehaviour, IEnemy
     public int maxHealth = 100;
     public int currentHealth;
 
+    public Vector3 starterScale; // To store the initial scale of the wizard
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentHealth = maxHealth;
+
+        // Store the initial scale of the wizard
+        starterScale = transform.localScale;
     }
 
     public void TakeDamage(int damage)
@@ -33,6 +38,19 @@ public class Wizard_Behavior : MonoBehaviour, IEnemy
         animator.SetBool("IsDead", true); // Set the IsDead parameter to true in the Animator
 
         GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
-        this.enabled = false; // Disable the script to stop further updates
+    }
+
+    public void Revive()
+    {
+        Debug.Log("Wizard has revived.");
+        currentHealth = maxHealth; // Reset health to max
+        animator.SetBool("IsDead", false); // Reset the IsDead parameter in the Animator
+        GetComponent<Collider2D>().enabled = true; // Re-enable the collider
+        // Stop all movement
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+        // Flip to starter side
+        if (starterScale != Vector3.zero) transform.localScale = starterScale;
+        // Reset aggro/target here if needed
     }
 }
