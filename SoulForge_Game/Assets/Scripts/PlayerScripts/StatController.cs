@@ -1,13 +1,30 @@
+/// <summary>
+/// StatController manages and synchronizes all core player stats (health, damage, range, speed) with PlayerHealth, PlayerCombat, and PlayerMovement.
+/// 
+/// How to use:
+/// - Attach to the player GameObject.
+/// - Use the public properties (e.g., MaxHealth, BaseDamage) to get/set stats.
+/// - Use methods like AddDamage, AddMaxHealth, Heal, etc. to modify stats at runtime.
+/// - All stat changes are automatically synchronized with the relevant components.
+/// - Example: statController.MaxHealth = 200; statController.AddDamage(10);
+/// </summary>
 using UnityEngine;
 
 public class StatController : MonoBehaviour
 {
-    // Core Stats
-    public int maxHealth = 120;
-    public int currentHealth = 120;
-    public int baseDamage = 10;
-    public float attackRange = 1.5f;
-    public float moveSpeed = 3f;
+    // Core Stats (private fields)
+    private int _maxHealth = 120;
+    private int _currentHealth = 120;
+    private int _baseDamage = 10;
+    private float _attackRange = 1.5f;
+    private float _moveSpeed = 3f;
+
+    // Public properties for access
+    public int MaxHealth { get => _maxHealth; set { _maxHealth = Mathf.Max(1, value); if (playerHealth != null) playerHealth.MaxHealth = _maxHealth; } }
+    public int CurrentHealth { get => _currentHealth; set { _currentHealth = Mathf.Clamp(value, 0, MaxHealth); if (playerHealth != null) playerHealth.CurrentHealth = _currentHealth; } }
+    public int BaseDamage { get => _baseDamage; set { _baseDamage = Mathf.Max(0, value); if (playerCombat != null) playerCombat.AttackDamage = _baseDamage; } }
+    public float AttackRange { get => _attackRange; set { _attackRange = Mathf.Max(0, value); if (playerCombat != null) playerCombat.AttackRange = _attackRange; } }
+    public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = Mathf.Max(0, value); if (playerMovement != null) playerMovement.Speed = _moveSpeed; } }
 
     public PlayerHealth playerHealth;
     public PlayerCombat playerCombat;
@@ -24,117 +41,83 @@ public class StatController : MonoBehaviour
     {
         if (playerHealth != null)
         {
-            playerHealth.maxHealth = maxHealth;
-            playerHealth.currentHealth = currentHealth;
+            playerHealth.MaxHealth = MaxHealth;
+            playerHealth.CurrentHealth = CurrentHealth;
         }
         if (playerCombat != null)
         {
-            playerCombat.attackDamage = baseDamage;
-            playerCombat.attackRange = attackRange;
+            playerCombat.AttackDamage = BaseDamage;
+            playerCombat.AttackRange = AttackRange;
         }
         if (playerMovement != null)
         {
-            playerMovement.speed = moveSpeed;
+            playerMovement.Speed = MoveSpeed;
         }
     }
 
     public void Heal(int amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        if (playerHealth != null)
-        {
-            playerHealth.currentHealth = currentHealth;
-        }
+        CurrentHealth += amount;
     }
 
     public void TakeDamage(int amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
-        if (playerHealth != null)
-        {
-            playerHealth.currentHealth = currentHealth;
-        }
+        CurrentHealth -= amount;
     }
 
     public void RestoreFullHealth()
     {
-        currentHealth = maxHealth;
-        if (playerHealth != null)
-        {
-            playerHealth.currentHealth = currentHealth;
-        }
+        CurrentHealth = MaxHealth;
     }
 
     public void AddDamage(int amount)
     {
-        baseDamage = Mathf.Max(0, baseDamage + amount);
-        if (playerCombat != null) playerCombat.attackDamage = baseDamage;
+        BaseDamage += amount;
     }
 
     public void AddAttackRange(float amount)
     {
-        attackRange = Mathf.Max(0, attackRange + amount);
-        if (playerCombat != null) playerCombat.attackRange = attackRange;
+        AttackRange += amount;
     }
 
     public void AddMoveSpeed(float amount)
     {
-        moveSpeed = Mathf.Max(0, moveSpeed + amount);
-        if (playerMovement != null) playerMovement.speed = moveSpeed;
+        MoveSpeed += amount;
     }
 
     public void SetMaxHealth(int value)
     {
-        maxHealth = Mathf.Max(1, value);
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        if (playerHealth != null)
-        {
-            playerHealth.maxHealth = maxHealth;
-            playerHealth.currentHealth = currentHealth;
-        }
+        MaxHealth = value;
     }
     public void SetBaseDamage(int value)
     {
-        baseDamage = Mathf.Max(0, value);
-        if (playerCombat != null) playerCombat.attackDamage = baseDamage;
+        BaseDamage = value;
     }
     public void SetAttackRange(float value)
     {
-        attackRange = Mathf.Max(0, value);
-        if (playerCombat != null) playerCombat.attackRange = attackRange;
+        AttackRange = value;
     }
     public void SetMoveSpeed(float value)
     {
-        moveSpeed = Mathf.Max(0, value);
-        if (playerMovement != null) playerMovement.speed = moveSpeed;
+        MoveSpeed = value;
     }
 
     public void AddMaxHealth(int amount)
     {
-        maxHealth = Mathf.Max(1, maxHealth + amount);
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        if (playerHealth != null)
-        {
-            playerHealth.maxHealth = maxHealth;
-            playerHealth.currentHealth = currentHealth;
-        }
+        MaxHealth += amount;
     }
 
     public void AddCurrentHealth(int amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        if (playerHealth != null)
-        {
-            playerHealth.currentHealth = currentHealth;
-        }
+        CurrentHealth += amount;
     }
 
     public void EnableLifeSteal(string upgradeStage)
     {
         if (playerCombat != null)
         {
-            playerCombat.lifeStealEnabled = true;
-            playerCombat.lifeStealUpgradeStage = upgradeStage;
+            playerCombat.LifeStealEnabled = true;
+            playerCombat.LifeStealUpgradeStage = upgradeStage;
         }
     }
 
@@ -142,10 +125,10 @@ public class StatController : MonoBehaviour
     {
         if (playerCombat != null)
         {
-            playerCombat.attackRate = Mathf.Max(0.1f, playerCombat.attackRate + amount);
+            playerCombat.AttackRate = Mathf.Max(0.1f, playerCombat.AttackRate + amount);
         }
     }
 
-    public bool IsAlive() => currentHealth > 0;
-    public float GetHealthPercent() => (float)currentHealth / maxHealth;
+    public bool IsAlive() => CurrentHealth > 0;
+    public float GetHealthPercent() => (float)CurrentHealth / MaxHealth;
 }

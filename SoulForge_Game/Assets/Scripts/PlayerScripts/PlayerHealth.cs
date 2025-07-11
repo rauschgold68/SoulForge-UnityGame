@@ -6,19 +6,22 @@ public class PlayerHealth : MonoBehaviour, IPlayer
 
 
     // --- Player Health Parameters ---
-    public int maxHealth = 120;
-    public int currentHealth;
+    private int _maxHealth = 120;
+    private int _currentHealth;
+
+    public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+    public int CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     public void TakeDamage(int damage)
     {
         animator.SetTrigger("Hit"); // Play Hit Animation
-        currentHealth -= damage;
-        if (currentHealth <= 0)
+        CurrentHealth -= damage;
+        if (CurrentHealth <= 0)
         {
             Die();
         }
@@ -47,10 +50,10 @@ public class PlayerHealth : MonoBehaviour, IPlayer
 
     public void Heal(int healAmount)
     {
-        currentHealth += healAmount;
-        if (currentHealth > maxHealth)
+        CurrentHealth += healAmount;
+        if (CurrentHealth > MaxHealth)
         {
-            currentHealth = maxHealth;
+            CurrentHealth = MaxHealth;
         }
     }
 
@@ -67,6 +70,6 @@ public class PlayerHealth : MonoBehaviour, IPlayer
 
     public int GetCurrentHealth()
     {
-        return currentHealth;
+        return CurrentHealth;
     }
 }

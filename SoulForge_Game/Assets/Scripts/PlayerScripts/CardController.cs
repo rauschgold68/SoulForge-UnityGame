@@ -15,10 +15,17 @@ using UnityEngine;
 /// </summary>
 public class CardController : StatController
 {
+    // Private field for range upgrade stage
+    private string _rangeUpgradeStage = "Default";
+
     /// <summary>
-    /// Tracks the current attack range upgrade stage.
+    /// Gets or sets the current attack range upgrade stage.
     /// </summary>
-    public string rangeUpgradeStage = "Default";
+    public string RangeUpgradeStage
+    {
+        get => _rangeUpgradeStage;
+        set => _rangeUpgradeStage = value;
+    }
 
     /// <summary>
     /// Upgrades the player's attack range based on the given upgrade type.
@@ -30,15 +37,15 @@ public class CardController : StatController
         {
             case "FirstUpgrade":
                 SetAttackRange(1f);
-                rangeUpgradeStage = "FirstUpgrade";
+                RangeUpgradeStage = "FirstUpgrade";
                 break;
             case "SecondUpgrade":
                 SetAttackRange(1.7f);
-                rangeUpgradeStage = "SecondUpgrade";
+                RangeUpgradeStage = "SecondUpgrade";
                 break;
             case "ThirdUpgrade":
                 SetAttackRange(2.5f);
-                rangeUpgradeStage = "ThirdUpgrade";
+                RangeUpgradeStage = "ThirdUpgrade";
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type: " + upgradeType);
@@ -51,7 +58,7 @@ public class CardController : StatController
     /// </summary>
     public string GetRangeUpgradeStage()
     {
-        return rangeUpgradeStage;
+        return RangeUpgradeStage;
     }
 
     /// <summary>
@@ -64,15 +71,15 @@ public class CardController : StatController
         {
             case "FirstUpgrade":
                 AddMaxHealth(50);
-                AddCurrentHealth(50);
+                AddCurrentHealth(50); // Fixed casing
                 break;
             case "SecondUpgrade":
                 AddMaxHealth(150);
-                AddCurrentHealth(150);
+                AddCurrentHealth(150); // Fixed casing
                 break;
             case "ThirdUpgrade":
                 AddMaxHealth(300);
-                AddCurrentHealth(300);
+                AddCurrentHealth(300); // Fixed casing
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type: " + upgradeType);

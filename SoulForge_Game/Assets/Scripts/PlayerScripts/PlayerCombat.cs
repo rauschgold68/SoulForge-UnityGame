@@ -15,19 +15,27 @@ public class PlayerCombat : MonoBehaviour
     public CardController cardController; // Assign in Inspector or via code
 
     // ---Player Parameters ---
-    // All fields are now private and not visible/editable in the Inspector
-    public float attackRange = 0.5f; // Range of the attack
-    public float attackRangeDefault = 0.5f; // Range of the default attack
-    public float attackRangeFirstUpgrade = 1f; // Range of the first upgrade attack
-    public float attackRangeSecondUpgrade = 1.7f; // Range of the second upgrade attack
-    public float attackRangeThirdUpgrade = 2.5f; // Range of the third upgrade attack
+    private float _attackRange = 0.5f;
+    private float _attackRangeDefault = 0.5f;
+    private float _attackRangeFirstUpgrade = 1f;
+    private float _attackRangeSecondUpgrade = 1.7f;
+    private float _attackRangeThirdUpgrade = 2.5f;
+    private int _attackDamage = 10;
+    private float _attackRate = 1.45f;
+    private float _nextAttackTime = 0f;
+    private bool _lifeStealEnabled = false;
+    private string _lifeStealUpgradeStage = "Default";
 
-    public int attackDamage = 10; // Damage dealt by the attack
-    public float attackRate = 1.45f; // Attacks per second
-    public float nextAttackTime = 0f; // Time when the next attack can occur
-
-    public bool lifeStealEnabled = false; // Flag to enable/disable life steal
-    public string lifeStealUpgradeStage = "Default"; // Current upgrade stage
+    public float AttackRange { get => _attackRange; set => _attackRange = value; }
+    public float AttackRangeDefault { get => _attackRangeDefault; set => _attackRangeDefault = value; }
+    public float AttackRangeFirstUpgrade { get => _attackRangeFirstUpgrade; set => _attackRangeFirstUpgrade = value; }
+    public float AttackRangeSecondUpgrade { get => _attackRangeSecondUpgrade; set => _attackRangeSecondUpgrade = value; }
+    public float AttackRangeThirdUpgrade { get => _attackRangeThirdUpgrade; set => _attackRangeThirdUpgrade = value; }
+    public int AttackDamage { get => _attackDamage; set => _attackDamage = value; }
+    public float AttackRate { get => _attackRate; set => _attackRate = value; }
+    public float NextAttackTime { get => _nextAttackTime; set => _nextAttackTime = value; }
+    public bool LifeStealEnabled { get => _lifeStealEnabled; set => _lifeStealEnabled = value; }
+    public string LifeStealUpgradeStage { get => _lifeStealUpgradeStage; set => _lifeStealUpgradeStage = value; }
     // -------------------------
 
     void Start()
@@ -39,14 +47,14 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= nextAttackTime)
+        if (Time.time >= NextAttackTime)
         {
             // Check if the attack button is pressed
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 // Play an attack animation
                 animator.SetTrigger("Attack");
-                nextAttackTime = Time.time + 1f / attackRate; // Set the next attack time
+                NextAttackTime = Time.time + 1f / AttackRate; // Set the next attack time
             }
         }
     }
@@ -57,23 +65,23 @@ public class PlayerCombat : MonoBehaviour
         string upgradeStage = cardController != null ? cardController.GetRangeUpgradeStage() : "Default";
         if (upgradeStage == "Default" && attackPoint != null)
         {
-            hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRangeDefault, enemyLayers);
+            hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, AttackRangeDefault, enemyLayers);
         }
         else if (upgradeStage == "FirstUpgrade" && attackPointFirstUpgrade != null)
         {
-            hitEnemies = Physics2D.OverlapCircleAll(attackPointFirstUpgrade.position, attackRangeFirstUpgrade, enemyLayers);
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointFirstUpgrade.position, AttackRangeFirstUpgrade, enemyLayers);
         }
         else if (upgradeStage == "SecondUpgrade" && attackPointSecondUpgrade != null)
         {
-            hitEnemies = Physics2D.OverlapCircleAll(attackPointSecondUpgrade.position, attackRangeSecondUpgrade, enemyLayers);
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointSecondUpgrade.position, AttackRangeSecondUpgrade, enemyLayers);
         }
         else if (upgradeStage == "ThirdUpgrade" && attackPointThirdUpgrade != null)
         {
-            hitEnemies = Physics2D.OverlapCircleAll(attackPointThirdUpgrade.position, attackRangeThirdUpgrade, enemyLayers);
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointThirdUpgrade.position, AttackRangeThirdUpgrade, enemyLayers);
         }
         else if (attackPoint != null)
         {
-            hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, AttackRange, enemyLayers);
         }
         // Damage all enemies in range
         if (hitEnemies != null)
@@ -81,9 +89,9 @@ public class PlayerCombat : MonoBehaviour
             foreach (Collider2D enemies in hitEnemies)
             {
                 IEnemy enemy = enemies.GetComponent<IEnemy>();
-                enemy?.TakeDamage(attackDamage);
+                enemy?.TakeDamage(AttackDamage);
                 PlayerHealth playerHealth = GetComponent<PlayerHealth>();
-                playerHealth?.LifeSteal(attackDamage, lifeStealEnabled, lifeStealUpgradeStage);
+                playerHealth?.LifeSteal(AttackDamage, LifeStealEnabled, LifeStealUpgradeStage);
             }
         }
     }
