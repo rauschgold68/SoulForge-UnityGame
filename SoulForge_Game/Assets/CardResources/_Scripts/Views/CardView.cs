@@ -13,6 +13,9 @@ public class CardView : MonoBehaviour
     public HandView HandView { get; set; }
     public CardGameManager GameManager { get; set; }
 
+    public CardTrigger CardTrigger { get; set; } // Neue Referenz
+
+
     private Vector3 originalScale;
 
     private PlayerMovement playerController;
@@ -66,8 +69,19 @@ public class CardView : MonoBehaviour
         gameObject.SetActive(false);
         if (playerController != null)
         {
-            playerController.SetMovementEnabled(true); // <-- funktioniert nur, wenn es diese Methode gibt
+            playerController.SetMovementEnabled(true); 
         }
+
+        if (playerController != null)
+{
+    playerController.SetMovementEnabled(true);
+}
+
+if (CardTrigger != null)
+{
+    CardTrigger.CloseDoor(); 
+}
+
 
 
     }

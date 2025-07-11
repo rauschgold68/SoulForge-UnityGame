@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class CardTrigger : MonoBehaviour
 {
-[SerializeField] private CardGameManager cardGameManager;
+    [SerializeField] private CardGameManager cardGameManager;
+    [SerializeField] private GameObject doorToClose;
+
     private bool hasTriggered = false;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -12,14 +14,22 @@ public class CardTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasTriggered = true;
-            var cardGameManager = FindFirstObjectByType<CardGameManager>();
-            var playerController = other.GetComponent<PlayerMovement>(); // Passe ggf. deinen Movement-Skriptnamen an
 
+            var playerController = other.GetComponent<PlayerMovement>();
             if (playerController != null)
-                playerController.SetMovementEnabled(false); // Methode im Movement-Skript, um Bewegung zu sperren
-
-            cardGameManager.TriggerCardChoice(playerController);
+            {
+                playerController.SetMovementEnabled(false);
+                cardGameManager.TriggerCardChoice(playerController, this);
+            }
         }
+    }
+    
+    public void CloseDoor()
+{
+    if (doorToClose != null)
+    {
+        doorToClose.SetActive(true); // Collider aktivieren = Tür zu
     }
 }
 
+}
