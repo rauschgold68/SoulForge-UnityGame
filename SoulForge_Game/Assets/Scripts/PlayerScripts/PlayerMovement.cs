@@ -3,20 +3,25 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
-
     public Animator animator;
 
     private float _speed = 3f;
     public float Speed { get => _speed; set => _speed = value; }
 
-    Vector2 movement;
+    private Vector2 movement;
+    private float horizontalMoveX = 0f;
+    private float horizontalMoveY = 0f;
+    private bool movementEnabled = true;
 
-    float horizontalMoveX = 0f;
-    float horizontalMoveY = 0f;
+    public void SetMovementEnabled(bool enabled)
+    {
+        movementEnabled = enabled;
+    }
 
-    // Update is called once per frame
     void Update()
     {
+        if (!movementEnabled) return;
+
         horizontalMoveX = Input.GetAxisRaw("Horizontal");
         horizontalMoveY = Input.GetAxisRaw("Vertical");
 
