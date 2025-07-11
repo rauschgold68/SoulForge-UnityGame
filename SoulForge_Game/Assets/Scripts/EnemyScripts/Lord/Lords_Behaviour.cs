@@ -122,17 +122,16 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
         Debug.Log("Lord of Darkness has been defeated! You win!");
         lordDefeated = true; // Set the flag to true when the Lord of Darkness is defeated
                              // Here you can add code to handle the win condition, like loading a new scene or showing a victory message
+        if (victoryScreen != null)
+    {
+        victoryScreen.SetActive(true); // Victory UI anzeigen
+    }
     }
 
     void Die()
 {
     animator.SetBool("IsDead", true); // Set animation
     GetComponent<Collider2D>().enabled = false;
-
-    if (victoryScreen != null)
-    {
-        victoryScreen.SetActive(true); // Victory UI anzeigen
-    }
 }
 
 
