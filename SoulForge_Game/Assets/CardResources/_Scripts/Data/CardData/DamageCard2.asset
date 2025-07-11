@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0135f0df876669449b1bea18020d175, type: 3}
   m_Name: DamageCard2
   m_EditorClassIdentifier: 
-  Description: Grants +3 Attack Damage.
+  Description: Deal +25 Attack Damage.
   Image: {fileID: 21300000, guid: e90f000d8bc7a4e4b84f05bed256a0b3, type: 3}
