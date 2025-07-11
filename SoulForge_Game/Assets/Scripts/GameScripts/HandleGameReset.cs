@@ -9,6 +9,10 @@ public class HandleGameReset : MonoBehaviour
     [Header("Room Door References")]
     public GameObject door1;
 
+    [Header("Card Game References")]
+public CardGameManager cardGameManager;
+
+
     [Header("Player & Enemy References")]
     public StatController playerStatController;
     public Transform playerTransform;
@@ -40,22 +44,29 @@ public class HandleGameReset : MonoBehaviour
     /// Call this to fully reset the game: player, stats, and all enemies.
     /// </summary>
     public void CommenceGameReset()
-    {
-        ResetPlayerPosition();
-        ResetPlayerStats();
-        RevivePlayer();
-        ReviveAllEnemies();
-        CullAllFireballs();
-        OpenDoor(door1);
-        if (roomController != null)
-            roomController.ResetRoomStates();
-        ResetAllRoomTriggers();
-        if (playerStatController?.playerHealth?.gameOverScreen != null)
-            playerStatController.playerHealth.gameOverScreen.SetActive(false);
-        
-        if (playerStatController?.playerHealth?.victoryScreen != null)
+{
+    ResetPlayerPosition();
+    ResetPlayerStats();
+    RevivePlayer();
+    ReviveAllEnemies();
+    CullAllFireballs();
+    OpenDoor(door1);
+    
+    if (roomController != null)
+        roomController.ResetRoomStates();
+
+    ResetAllRoomTriggers();
+
+    if (playerStatController?.playerHealth?.gameOverScreen != null)
+        playerStatController.playerHealth.gameOverScreen.SetActive(false);
+
+    if (playerStatController?.playerHealth?.victoryScreen != null)
         playerStatController.playerHealth.victoryScreen.SetActive(false);
-    }
+
+    if (cardGameManager != null)
+        cardGameManager.ResetDeck();
+}
+
 
     public void ResetPlayerPosition()
     {

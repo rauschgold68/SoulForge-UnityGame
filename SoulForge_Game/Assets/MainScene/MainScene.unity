@@ -24558,6 +24558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door1: {fileID: 2035416659}
+  cardGameManager: {fileID: 1647555662}
   playerStatController: {fileID: 1130179747}
   playerTransform: {fileID: 1130179744}
   playerStartPosition: {x: 0, y: 0, z: 0}
