@@ -6,7 +6,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
-    public float speed = 3f;
+    private float _speed = 3f;
+    public float Speed { get => _speed; set => _speed = value; }
 
     Vector2 movement;
 
@@ -27,9 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-
-        // Flip nur auf der X-Achse
+        rb.MovePosition(rb.position + movement * Speed * Time.fixedDeltaTime);
         if (movement.x != 0)
         {
             Vector3 scale = transform.localScale;

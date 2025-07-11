@@ -22,10 +22,13 @@ public class Ghoul_Behaviour : MonoBehaviour, IEnemy
     private int explosionDamage = 30; // Damage dealt by explosion
     public LayerMask playerLayer; // LayerMask to identify player(s)
 
+    public Vector3 starterScale; // Placeholder for the starter scale
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentHealth = maxHealth;
+        starterScale = transform.localScale; // Initialize starterScale
     }
 
     public void TakeDamage(int damage)
@@ -54,7 +57,20 @@ public class Ghoul_Behaviour : MonoBehaviour, IEnemy
         animator.SetBool("IsDead", true); // Set the IsDead parameter to true in the Animator
 
         GetComponent<Collider2D>().enabled = false; // Disable the collider to prevent further interactions
-        this.enabled = false; // Disable the script to stop further updates
+    }
+
+    public void Revive()
+    {
+        Debug.Log("Ghoul has revived.");
+        currentHealth = maxHealth; // Reset health to max
+        animator.SetBool("IsDead", false); // Reset the IsDead parameter in the Animator
+        GetComponent<Collider2D>().enabled = true; // Re-enable the collider
+        // Stop all movement
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+        // Flip to starter side
+        if (starterScale != Vector3.zero) transform.localScale = starterScale;
+        // Reset aggro/target here if needed
     }
 
     // Utility method for state machine to check if Ghoul is immune
