@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0135f0df876669449b1bea18020d175, type: 3}
   m_Name: AttSpeedCard3
   m_EditorClassIdentifier: 
-  Description: Raises your Attack Speed a lot.
+  Description: Grants a large Attack Speed boost.
   Image: {fileID: 21300000, guid: 0d2182d3e55e0a944baa0f1d3edb8e10, type: 3}

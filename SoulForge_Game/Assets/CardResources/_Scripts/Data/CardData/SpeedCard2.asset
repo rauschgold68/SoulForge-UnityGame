@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0135f0df876669449b1bea18020d175, type: 3}
   m_Name: SpeedCard2
   m_EditorClassIdentifier: 
-  Description: Grants +3 Movement Speed.
+  Description: Granst a mediocre Speed boost.
   Image: {fileID: 21300000, guid: 95919049fb3a70c44a60e76c386b8471, type: 3}
