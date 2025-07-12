@@ -59,13 +59,13 @@ private void Start()
         switch (upgradeStage)
         {
             case "FirstUpgrade":
-                lifeStealMultiplier = 0.1f;
-                break;
-            case "SecondUpgrade":
                 lifeStealMultiplier = 0.2f;
                 break;
+            case "SecondUpgrade":
+                lifeStealMultiplier = 0.6f;
+                break;
             case "ThirdUpgrade":
-                lifeStealMultiplier = 0.3f;
+                lifeStealMultiplier = 1.2f;
                 break;
         }
         lifeStealAmount = (int)(attackDamage * lifeStealMultiplier);

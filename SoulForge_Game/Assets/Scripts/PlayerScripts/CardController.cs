@@ -119,13 +119,13 @@ public class CardController : StatController
         switch (upgradeType)
         {
             case "FirstUpgrade":
-                AddMoveSpeed(0.5f);
+                AddMoveSpeed(0.8f);
                 break;
             case "SecondUpgrade":
-                AddMoveSpeed(1f);
+                AddMoveSpeed(2f);
                 break;
             case "ThirdUpgrade":
-                AddMoveSpeed(1.5f);
+                AddMoveSpeed(3f);
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type: " + upgradeType);
@@ -145,10 +145,10 @@ public class CardController : StatController
                 AddAttackSpeed(0.2f);
                 break;
             case "SecondUpgrade":
-                AddAttackSpeed(0.4f);
+                AddAttackSpeed(0.6f);
                 break;
             case "ThirdUpgrade":
-                AddAttackSpeed(0.6f);
+                AddAttackSpeed(1.2f);
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type: " + upgradeType);

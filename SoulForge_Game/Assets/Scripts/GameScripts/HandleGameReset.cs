@@ -10,7 +10,7 @@ public class HandleGameReset : MonoBehaviour
     public GameObject door1;
 
     [Header("Card Game References")]
-public CardGameManager cardGameManager;
+    public CardGameManager cardGameManager;
 
 
     [Header("Player & Enemy References")]
@@ -68,7 +68,7 @@ public CardGameManager cardGameManager;
         playerStatController.playerHealth.victoryScreen.SetActive(false);
 
     if (cardGameManager != null)
-    cardGameManager.ResetDeck(false); // ← Kein Reload aus Resources
+    cardGameManager.ResetDeck(); // ← Kein Reload aus Resources
 
 }
 
@@ -88,6 +88,14 @@ public CardGameManager cardGameManager;
             playerStatController.BaseDamage = 10;
             playerStatController.AttackRange = 1.5f;
             playerStatController.MoveSpeed = 3f;
+            playerStatController.SoulsThisRound = 0;
+
+            if (playerStatController.playerCombat != null)
+            {
+                var cardController = playerStatController.playerCombat.cardController;
+                if (cardController != null)
+                    cardController.RangeUpgradeStage = "Default";
+            }
             // Add more stat resets as needed
         }
     }
