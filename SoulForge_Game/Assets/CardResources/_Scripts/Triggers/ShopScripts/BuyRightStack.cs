@@ -10,7 +10,12 @@ public class BuyRightStack : MonoBehaviour
     public GameObject soldOutGO;  // ← Setze in Inspector auf dein "Sold Out"-Objekt
     public GameObject pricesGO;   // ← Setze in Inspector auf dein Preise-Objekt
 
+    public GameObject soldOutGO2;  // ← Setze in Inspector auf dein "Sold Out"-Objekt
+    public GameObject pricesGO2;   // ← Setze in Inspector auf dein Preise-Objekt
+
     public Button thisButton;     // ← Setze in Inspector auf diesen Button (oder hole automatisch)
+
+    public Button thisButton2; 
 
     void Start()
     {
@@ -40,8 +45,17 @@ public class BuyRightStack : MonoBehaviour
         if (pricesGO != null)
             pricesGO.SetActive(false);
 
+            if (soldOutGO2 != null)
+            soldOutGO2.SetActive(true);
+
+        if (pricesGO2 != null)
+            pricesGO2.SetActive(false);
+
         if (thisButton != null)
             thisButton.interactable = false;
+
+        if (thisButton2 != null)
+            thisButton2.interactable = false;
 
         // Optional: Wenn du den ganzen Button ausblenden willst:
         // thisButton.gameObject.SetActive(false);
