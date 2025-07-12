@@ -18,6 +18,8 @@ public class StatController : MonoBehaviour
     private int _baseDamage = 10;
     private float _attackRange = 1.5f;
     private float _moveSpeed = 3f;
+    private int _soulAmount = 0;
+    private int _soulsThisRound = 0;
 
     // Public properties for access
     public int MaxHealth { get => _maxHealth; set { _maxHealth = Mathf.Max(1, value); if (playerHealth != null) playerHealth.MaxHealth = _maxHealth; } }
@@ -25,6 +27,23 @@ public class StatController : MonoBehaviour
     public int BaseDamage { get => _baseDamage; set { _baseDamage = Mathf.Max(0, value); if (playerCombat != null) playerCombat.AttackDamage = _baseDamage; } }
     public float AttackRange { get => _attackRange; set { _attackRange = Mathf.Max(0, value); if (playerCombat != null) playerCombat.AttackRange = _attackRange; } }
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = Mathf.Max(0, value); if (playerMovement != null) playerMovement.Speed = _moveSpeed; } }
+    public int SoulAmount { get => _soulAmount; set { _soulAmount = Mathf.Max(0, value); if (playerHealth != null) playerHealth.SoulAmount = _soulAmount; } }
+    public int SoulsThisRound { get => _soulsThisRound; set { _soulsThisRound = Mathf.Max(0, value); if (playerHealth != null) playerHealth.SoulsThisRound = _soulsThisRound; } }
+    public void AddSouls(int amount)
+    {
+        SoulAmount += amount;
+        SoulsThisRound += amount;
+    }
+
+    public void SetSoulsThisRound(int value)
+    {
+        SoulsThisRound = value;
+    }
+
+    public void SetSoulAmount(int value)
+    {
+        SoulAmount = value;
+    }
 
     public PlayerHealth playerHealth;
     public PlayerCombat playerCombat;

@@ -3,13 +3,18 @@ using System.Collections;
 
 
 public class PlayerHealth : MonoBehaviour, IPlayer
-{
+    {
     public Animator animator; // Reference to the Animator component
     public HealthBar healthBar;
 
     // --- Player Health Parameters ---
     private int _maxHealth = 120;
     private int _currentHealth;
+
+    // --- Soul Stats ---
+    private int _soulAmount = 0;
+    private int _soulsThisRound = 0;
+
 
     private HandleGameReset gameResetHandler;
 
@@ -20,7 +25,10 @@ public class PlayerHealth : MonoBehaviour, IPlayer
     public int MaxHealth { get => _maxHealth; set { _maxHealth = value; if (healthBar != null) healthBar.setMaxHealth(_maxHealth); } }
     public int CurrentHealth { get => _currentHealth; set { _currentHealth = value; if (healthBar != null) healthBar.setCurrentHealth(_currentHealth); } }
 
-    private void Start()
+    public int SoulAmount { get => _soulAmount; set { _soulAmount = Mathf.Max(0, value); var stat = GetComponent<StatController>(); if (stat != null && stat.SoulAmount != _soulAmount) stat.SoulAmount = _soulAmount; } }
+    public int SoulsThisRound { get => _soulsThisRound; set { _soulsThisRound = Mathf.Max(0, value); var stat = GetComponent<StatController>(); if (stat != null && stat.SoulsThisRound != _soulsThisRound) stat.SoulsThisRound = _soulsThisRound; } }
+
+private void Start()
 {
     CurrentHealth = MaxHealth;
     gameResetHandler = FindFirstObjectByType<HandleGameReset>();
@@ -105,7 +113,8 @@ private IEnumerator WaitAndResetGame()
 
 
     public int GetCurrentHealth()
-    {
-        return CurrentHealth;
-    }
+{
+    return CurrentHealth;
+}
+    
 }

@@ -9,20 +9,26 @@ public class RoomController : MonoBehaviour
     public Wizard_Behavior room1Wizard;
     public Golem_Behaviour room2Golem;
 
-    public GameObject room1Door; // <-- Referenz zur Tür (optional: separate für "Tür zu" und "Tür auf")
+    /// <summary>
+    /// Reference to the Room 1 door (optionally separate for "closed" and "open" states)
+    /// </summary>
+    public GameObject room1Door;
     public GameObject room2Door;
 
     public GameObject room3Door;
 
     [SerializeField] private CardGameManager cardGameManager;
-    [SerializeField] private PlayerMovement player; // Direkt gesetzt oder per Find
+    /// <summary>
+    /// Reference to the player (set directly or found at runtime)
+    /// </summary>
+    [SerializeField] private PlayerMovement player;
 
     private bool room1AlreadyCleared = false;
     private bool room2AlreadyCleared = false;
 
     void Update()
     {
-        // Raum 1 prüfen
+        // Check if Room 1 is cleared
         if (!room1AlreadyCleared)
         {
             bool cleared = true;
@@ -46,7 +52,7 @@ public class RoomController : MonoBehaviour
 
         }
 
-        // Raum 2 prüfen
+        // Check if Room 2 is cleared
         if (!room2AlreadyCleared)
         {
             bool cleared = (room2Golem == null || room2Golem.currentHealth <= 0);
@@ -89,7 +95,7 @@ public class RoomController : MonoBehaviour
         room1AlreadyCleared = false;
         room2AlreadyCleared = false;
 
-        // Türen ggf. schließen oder öffnen (je nachdem wie es sein soll)
+        // Optionally close or open doors depending on desired state
         if (room1Door != null) OpenDoor(room1Door);
         if (room2Door != null) CloseDoor(room2Door);
     }
