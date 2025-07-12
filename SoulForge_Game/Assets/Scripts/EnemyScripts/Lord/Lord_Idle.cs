@@ -18,6 +18,12 @@ public class Lord_Idle : StateMachineBehaviour
             // If the player is within chase distance, trigger the Run state
             if (distanceToPlayer < chaseDistance)
             {
+                // Zeige die BossBar, wenn sie noch nicht sichtbar ist
+                var bossBar = BossBar.Instance;
+                if (bossBar != null && !bossBar.barRoot.activeSelf)
+                {
+                    bossBar.ShowBar();
+                }
                 animator.SetTrigger("Run");
             }
             // Otherwise, remain in Idle

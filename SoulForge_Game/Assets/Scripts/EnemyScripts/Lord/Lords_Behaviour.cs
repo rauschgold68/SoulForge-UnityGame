@@ -142,7 +142,8 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
         if (rb != null) rb.linearVelocity = Vector2.zero;
         // Flip to starter side
         if (starterScale != Vector3.zero) transform.localScale = starterScale;
-        // Reset aggro/target here if needed
+        // Setze Animator auf Idle, damit Lord "vergisst", dass er den Spieler gesehen hat
+        if (animator != null) animator.SetTrigger("Idle");
     }
 
     public void LookAtPlayer()
@@ -167,4 +168,6 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
             Gizmos.DrawWireSphere(attackPointHeavy.position, 2.7f);
         }
     }
+
+    public int MaxHealth => maxHealth;
 }

@@ -50,6 +50,10 @@ public class HandleGameReset : MonoBehaviour
         if (roomController != null)
             roomController.ResetRoomStates();
         ResetAllRoomTriggers();
+        // Hide Lord BossBar
+        var bossBar = FindAnyObjectByType<BossBar>();
+        if (bossBar != null)
+            bossBar.HideBar();
     }
 
     public void ResetPlayerPosition()
