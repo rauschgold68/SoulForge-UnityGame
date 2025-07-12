@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa6ed4b9eb5df040aedd4ad782c311f, type: 3}
   m_Name: LifeStealCardEpic
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: affb587dff824ca4488e8aca4f817399, type: 2}

@@ -68,7 +68,8 @@ public CardGameManager cardGameManager;
         playerStatController.playerHealth.victoryScreen.SetActive(false);
 
     if (cardGameManager != null)
-        cardGameManager.ResetDeck();
+    cardGameManager.ResetDeck(false); // ← Kein Reload aus Resources
+
 }
 
 
