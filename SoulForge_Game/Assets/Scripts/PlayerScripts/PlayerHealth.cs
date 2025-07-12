@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerHealth : MonoBehaviour, IPlayer
 {
     public Animator animator; // Reference to the Animator component
-
+    public HealthBar healthBar;
 
     // --- Player Health Parameters ---
     private int _maxHealth = 120;
@@ -14,13 +14,19 @@ public class PlayerHealth : MonoBehaviour, IPlayer
     private HandleGameReset gameResetHandler;
 
 
-    public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
-    public int CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
+    public int MaxHealth { get => _maxHealth; set { _maxHealth = value; if (healthBar != null) healthBar.setMaxHealth(_maxHealth); } }
+    public int CurrentHealth { get => _currentHealth; set { _currentHealth = value; if (healthBar != null) healthBar.setCurrentHealth(_currentHealth); } }
 
     private void Start()
 {
     CurrentHealth = MaxHealth;
     gameResetHandler = FindFirstObjectByType<HandleGameReset>();
+    if (healthBar == null) healthBar = FindAnyObjectByType<HealthBar>();
+    if (healthBar != null)
+    {
+        healthBar.setMaxHealth(MaxHealth);
+        healthBar.setCurrentHealth(CurrentHealth);
+    }
 }
 
 
