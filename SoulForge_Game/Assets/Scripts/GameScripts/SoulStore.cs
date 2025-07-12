@@ -14,14 +14,14 @@ public class SoulStore : MonoBehaviour
         // cardController = FindFirstObjectByType<CardController>();
     }
 
-    private int GetCurrentSouls()
+    private int GetSouls()
     {
         return statController != null ? statController.SoulAmount : 0;
     }
 
     public bool CanAfford(int cost)
     {
-        return GetCurrentSouls() >= cost;
+        return GetSouls() >= cost;
     }
 
     public bool BuyCardDeckUpgrade1()
