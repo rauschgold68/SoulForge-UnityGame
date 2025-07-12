@@ -32,67 +32,67 @@ public class CardGameManager : MonoBehaviour
     }
 
     private void Update()
-{
-    // Entferne oder kommentiere diese Zeile:
-    // if (Input.GetKeyDown(KeyCode.Space))
-    // {
-    //     handView.ClearHand();
-    //     StartCoroutine(SpawnThreeRandomCardsWithLock());
-    // }
-
-    if (Input.GetMouseButtonDown(0))
     {
-        Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
-        if (hit.collider != null)
+        // Entferne oder kommentiere diese Zeile:
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     handView.ClearHand();
+        //     StartCoroutine(SpawnThreeRandomCardsWithLock());
+        // }
+
+        if (Input.GetMouseButtonDown(0))
         {
-            var cardView = hit.collider.GetComponent<CardView>();
-            if (cardView != null)
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+            if (hit.collider != null)
             {
-                cardView.OnClickedByManager();
+                var cardView = hit.collider.GetComponent<CardView>();
+                if (cardView != null)
+                {
+                    cardView.OnClickedByManager();
+                }
             }
         }
     }
-}
 
 
     public void TriggerCardChoice(PlayerMovement player, System.Action onFinish = null)
-{
-    StartCoroutine(SpawnThreeRandomCardsWithLock(player, onFinish));
-}
-
-
-private IEnumerator SpawnThreeRandomCardsWithLock(PlayerMovement player, System.Action onFinish = null)
-{
-    player.SetMovementEnabled(false);
-    handView.ClearHand();
-
-    int cardsToDraw = Mathf.Min(3, availableCards.Count);
-    float spacing = 4f;
-    Vector3 cameraCenter = Camera.main.transform.position;
-    Vector3 spawnCenter = new Vector3(cameraCenter.x, cameraCenter.y, 0f);
-    float totalWidth = spacing * (cardsToDraw - 1);
-    float startX = spawnCenter.x - totalWidth / 2;
-
-    for (int i = 0; i < cardsToDraw; i++)
     {
-        Card randomCard = GetRandomCardByRarity();
-        if (randomCard == null) yield break;
-
-        availableCards.Remove(randomCard);
-
-        Vector3 spawnPos = new Vector3(startX + i * spacing, spawnCenter.y, -1f);
-        CardView cardView = Instantiate(cardPrefab, spawnPos, Quaternion.identity);
-        
-        cardView.Setup(randomCard, player);
-        cardView.HandView = handView;
-        cardView.GameManager = this;
-        cardView.OnCardChosen = onFinish; // 🔑 Callback nach Auswahl
-
-        yield return StartCoroutine(handView.AddCard(cardView));
-        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(SpawnThreeRandomCardsWithLock(player, onFinish));
     }
-}
+
+
+    private IEnumerator SpawnThreeRandomCardsWithLock(PlayerMovement player, System.Action onFinish = null)
+    {
+        player.SetMovementEnabled(false);
+        handView.ClearHand();
+
+        int cardsToDraw = Mathf.Min(3, availableCards.Count);
+        float spacing = 4f;
+        Vector3 cameraCenter = Camera.main.transform.position;
+        Vector3 spawnCenter = new Vector3(cameraCenter.x, cameraCenter.y, 0f);
+        float totalWidth = spacing * (cardsToDraw - 1);
+        float startX = spawnCenter.x - totalWidth / 2;
+
+        for (int i = 0; i < cardsToDraw; i++)
+        {
+            Card randomCard = GetRandomCardByRarity();
+            if (randomCard == null) yield break;
+
+            availableCards.Remove(randomCard);
+
+            Vector3 spawnPos = new Vector3(startX + i * spacing, spawnCenter.y, -1f);
+            CardView cardView = Instantiate(cardPrefab, spawnPos, Quaternion.identity);
+
+            cardView.Setup(randomCard, player);
+            cardView.HandView = handView;
+            cardView.GameManager = this;
+            cardView.OnCardChosen = onFinish; // Callback nach Auswahl
+
+            yield return StartCoroutine(handView.AddCard(cardView));
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 
 
 
@@ -161,4 +161,21 @@ private IEnumerator SpawnThreeRandomCardsWithLock(PlayerMovement player, System.
             Debug.Log("Karte zurückgegeben: " + card.Title);
         }
     }
+    
+    public void ResetDeck()
+{
+    availableCards.Clear();
+
+    // Optional: Lade Karten neu aus Resources, falls sich Dateien im Laufzeitverzeichnis ändern könnten
+    commonCards = new List<Card>(Resources.LoadAll<Card>("Cards/Common"));
+    rareCards = new List<Card>(Resources.LoadAll<Card>("Cards/Rare"));
+    epicCards = new List<Card>(Resources.LoadAll<Card>("Cards/Epic"));
+
+    availableCards.AddRange(commonCards);
+    availableCards.AddRange(rareCards);
+    availableCards.AddRange(epicCards);
+
+    Debug.Log("Kartendeck wurde zurückgesetzt.");
+}
+
 }

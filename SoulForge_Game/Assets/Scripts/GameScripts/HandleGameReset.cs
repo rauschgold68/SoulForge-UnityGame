@@ -9,6 +9,10 @@ public class HandleGameReset : MonoBehaviour
     [Header("Room Door References")]
     public GameObject door1;
 
+    [Header("Card Game References")]
+public CardGameManager cardGameManager;
+
+
     [Header("Player & Enemy References")]
     public StatController playerStatController;
     public Transform playerTransform;
@@ -40,21 +44,33 @@ public class HandleGameReset : MonoBehaviour
     /// Call this to fully reset the game: player, stats, and all enemies.
     /// </summary>
     public void CommenceGameReset()
-    {
-        ResetPlayerPosition();
-        ResetPlayerStats();
-        RevivePlayer();
-        ReviveAllEnemies();
-        CullAllFireballs();
-        OpenDoor(door1);
-        if (roomController != null)
-            roomController.ResetRoomStates();
-        ResetAllRoomTriggers();
+{
+    ResetPlayerPosition();
+    ResetPlayerStats();
+    RevivePlayer();
+    ReviveAllEnemies();
+    CullAllFireballs();
+    OpenDoor(door1);
+    
+    if (roomController != null)
+        roomController.ResetRoomStates();
+
+    ResetAllRoomTriggers();
         // Hide Lord BossBar
         var bossBar = FindAnyObjectByType<BossBar>();
         if (bossBar != null)
             bossBar.HideBar();
-    }
+
+    if (playerStatController?.playerHealth?.gameOverScreen != null)
+        playerStatController.playerHealth.gameOverScreen.SetActive(false);
+
+    if (playerStatController?.playerHealth?.victoryScreen != null)
+        playerStatController.playerHealth.victoryScreen.SetActive(false);
+
+    if (cardGameManager != null)
+        cardGameManager.ResetDeck();
+}
+
 
     public void ResetPlayerPosition()
     {
@@ -88,6 +104,12 @@ public class HandleGameReset : MonoBehaviour
             if (move != null) move.enabled = true;
             var combat = health.GetComponent<PlayerCombat>();
             if (combat != null) combat.enabled = true;
+
+            if (health.gameOverScreen != null)
+                health.gameOverScreen.SetActive(false);
+            
+            if (health.victoryScreen != null)
+            health.victoryScreen.SetActive(false);
             // Add more revive logic as needed
         }
     }

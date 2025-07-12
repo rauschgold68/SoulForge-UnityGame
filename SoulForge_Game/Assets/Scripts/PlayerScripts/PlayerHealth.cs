@@ -13,6 +13,9 @@ public class PlayerHealth : MonoBehaviour, IPlayer
 
     private HandleGameReset gameResetHandler;
 
+    [SerializeField] public GameObject gameOverScreen;
+
+    [SerializeField] public GameObject victoryScreen;
 
     public int MaxHealth { get => _maxHealth; set { _maxHealth = value; if (healthBar != null) healthBar.setMaxHealth(_maxHealth); } }
     public int CurrentHealth { get => _currentHealth; set { _currentHealth = value; if (healthBar != null) healthBar.setCurrentHealth(_currentHealth); } }
@@ -76,14 +79,19 @@ public class PlayerHealth : MonoBehaviour, IPlayer
     animator.SetBool("IsDead", true); // Death Animation
     GetComponent<Collider2D>().enabled = false;
 
+    if (gameOverScreen != null)
+        gameOverScreen.SetActive(true);
+
     var move = GetComponent<PlayerMovement>();
     if (move != null) move.enabled = false;
 
     var combat = GetComponent<PlayerCombat>();
     if (combat != null) combat.enabled = false;
 
-    StartCoroutine(WaitAndResetGame());
+    // Entferne den automatischen Reset:
+    // StartCoroutine(WaitAndResetGame());
 }
+
 
 private IEnumerator WaitAndResetGame()
 {
