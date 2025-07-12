@@ -87,7 +87,7 @@ public class CardGameManager : MonoBehaviour
             cardView.Setup(randomCard, player);
             cardView.HandView = handView;
             cardView.GameManager = this;
-            cardView.OnCardChosen = onFinish; // 🔑 Callback nach Auswahl
+            cardView.OnCardChosen = onFinish; // Callback nach Auswahl
 
             yield return StartCoroutine(handView.AddCard(cardView));
             yield return new WaitForSeconds(0.1f);
