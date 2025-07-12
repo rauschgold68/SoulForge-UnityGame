@@ -3,7 +3,7 @@ using UnityEngine;
 public class SoulStore : MonoBehaviour
 {
     public int cardDeckUpgrade1Cost = 50;
-    public int cardDeckUpgrade2Cost = 200;
+    public int cardDeckUpgrade2Cost = 120;
 
     private StatController statController;
     // private CardController cardController;
