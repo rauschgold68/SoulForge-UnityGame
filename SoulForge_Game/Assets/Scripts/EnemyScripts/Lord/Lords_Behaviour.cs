@@ -56,9 +56,24 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
         currentHealth -= damage;
         animator.SetTrigger("Hit"); // Play Hit Animation
 
-        // Activate immunity frames
+        // Activate immunity frames with random duration
         isImmune = true;
-        immunityTimer = immunityDuration;
+        float rand = UnityEngine.Random.value;
+        if (rand < 0.1f)
+        {
+            // 10% chance: very short immunity (0–0.2s)
+            immunityTimer = UnityEngine.Random.Range(0f, 0.2f);
+        }
+        else if (rand < 0.7f)
+        {
+            // 60% chance: medium immunity (40–80% of default)
+            immunityTimer = UnityEngine.Random.Range(immunityDuration * 0.4f, immunityDuration * 0.8f);
+        }
+        else
+        {
+            // 30% chance: full default immunity
+            immunityTimer = immunityDuration;
+        }
 
         if (currentHealth <= 0)
         {
