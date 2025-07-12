@@ -14,9 +14,17 @@ public class PlayerMovement : MonoBehaviour
     private bool movementEnabled = true;
 
     public void SetMovementEnabled(bool enabled)
+{
+    movementEnabled = enabled;
+
+    if (!enabled)
     {
-        movementEnabled = enabled;
+        movement = Vector2.zero;
+        rb.linearVelocity = Vector2.zero; // wichtig, um sofort anzuhalten
+        animator.SetFloat("moveSpeed", 0f);
     }
+}
+
 
     void Update()
     {
@@ -32,13 +40,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
+{
+    if (movementEnabled)
     {
         rb.MovePosition(rb.position + movement * Speed * Time.fixedDeltaTime);
-        if (movement.x != 0)
-        {
-            Vector3 scale = transform.localScale;
-            scale.x = Mathf.Sign(movement.x) * Mathf.Abs(scale.x);
-            transform.localScale = scale;
-        }
     }
+
+    if (movement.x != 0)
+    {
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Sign(movement.x) * Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
+}
+
 }

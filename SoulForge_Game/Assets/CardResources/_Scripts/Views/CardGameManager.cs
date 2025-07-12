@@ -57,9 +57,17 @@ public class CardGameManager : MonoBehaviour
 
 
     public void TriggerCardChoice(PlayerMovement player, System.Action onFinish = null)
+{
+    // Wenn bereits ein Callback übergeben wurde, erweitere es um Bewegung wieder aktivieren
+    System.Action finalCallback = () =>
     {
-        StartCoroutine(SpawnThreeRandomCardsWithLock(player, onFinish));
-    }
+        player.SetMovementEnabled(true);
+        onFinish?.Invoke(); // ursprünglichen Callback aufrufen
+    };
+
+    StartCoroutine(SpawnThreeRandomCardsWithLock(player, finalCallback));
+}
+
 
 
     private IEnumerator SpawnThreeRandomCardsWithLock(PlayerMovement player, System.Action onFinish = null)
