@@ -15,7 +15,12 @@ public class BuyRightStack : MonoBehaviour
 
     public Button thisButton;     // ← Setze in Inspector auf diesen Button (oder hole automatisch)
 
-    public Button thisButton2; 
+    public SoulStore soulStore;  // ← Im Inspector zuweisen
+    public int stackCost = 125;   // ← Preis des Stacks festlegen
+
+    public GameObject ErrorText;
+
+    public Button thisButton2;
 
     void Start()
     {
@@ -28,11 +33,23 @@ public class BuyRightStack : MonoBehaviour
 
     private void OnBuy()
     {
-        if (cardGameManager == null)
+        if (cardGameManager == null || soulStore == null)
         {
-            Debug.LogWarning("CardGameManager nicht zugewiesen.");
+            Debug.LogWarning("CardGameManager oder SoulStore nicht zugewiesen.");
             return;
         }
+
+        if (!soulStore.CanAfford(stackCost))
+        {
+            if (ErrorText != null)
+                StartCoroutine(ShowErrorText());
+
+            Debug.Log("Nicht genug Souls für diesen Stack.");
+            return;
+        }
+
+        // Kaufe Stack (Souls abziehen)
+        soulStore.SpendSouls(stackCost);
 
         // Nur Epic Cards erlauben
         List<Card> epicCards = new List<Card>(Resources.LoadAll<Card>("Cards/Epic"));
@@ -45,7 +62,7 @@ public class BuyRightStack : MonoBehaviour
         if (pricesGO != null)
             pricesGO.SetActive(false);
 
-            if (soldOutGO2 != null)
+        if (soldOutGO2 != null)
             soldOutGO2.SetActive(true);
 
         if (pricesGO2 != null)
@@ -56,8 +73,13 @@ public class BuyRightStack : MonoBehaviour
 
         if (thisButton2 != null)
             thisButton2.interactable = false;
-
-        // Optional: Wenn du den ganzen Button ausblenden willst:
-        // thisButton.gameObject.SetActive(false);
     }
+
+private System.Collections.IEnumerator ShowErrorText()
+{
+    ErrorText.SetActive(true);
+    yield return new WaitForSeconds(0.5f);
+    ErrorText.SetActive(false);
+}
+
 }

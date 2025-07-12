@@ -12,6 +12,12 @@ public class BuyLeftStack : MonoBehaviour
 
     public Button thisButton;     // ← Setze in Inspector auf diesen Button (oder hole automatisch)
 
+    public SoulStore soulStore;  // ← Im Inspector zuweisen
+    public int stackCost = 50;   // ← Preis des Stacks festlegen
+
+    public GameObject ErrorText;
+
+
     void Start()
     {
         // Falls du vergessen hast, im Inspector den Button zu setzen
@@ -23,11 +29,23 @@ public class BuyLeftStack : MonoBehaviour
 
     private void OnBuy()
     {
-        if (cardGameManager == null)
+        if (cardGameManager == null || soulStore == null)
         {
-            Debug.LogWarning("CardGameManager nicht zugewiesen.");
+            Debug.LogWarning("CardGameManager oder SoulStore nicht zugewiesen.");
             return;
         }
+
+        if (!soulStore.CanAfford(stackCost))
+        {
+            if (ErrorText != null)
+                StartCoroutine(ShowErrorText());
+
+            Debug.Log("Nicht genug Souls für diesen Stack.");
+            return;
+        }
+
+        // Kaufe Stack (Souls abziehen)
+        soulStore.SpendSouls(stackCost);
 
         // Nur Rare Cards erlauben
         List<Card> rareCards = new List<Card>(Resources.LoadAll<Card>("Cards/Rare"));
@@ -42,8 +60,13 @@ public class BuyLeftStack : MonoBehaviour
 
         if (thisButton != null)
             thisButton.interactable = false;
-
-        // Optional: Wenn du den ganzen Button ausblenden willst:
-        // thisButton.gameObject.SetActive(false);
     }
+
+private System.Collections.IEnumerator ShowErrorText()
+{
+    ErrorText.SetActive(true);
+    yield return new WaitForSeconds(0.5f);
+    ErrorText.SetActive(false);
+}
+
 }

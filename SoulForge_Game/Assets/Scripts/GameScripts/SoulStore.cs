@@ -47,4 +47,11 @@ public class SoulStore : MonoBehaviour
         }
         return false;
     }
+
+    public void SpendSouls(int amount)
+{
+    if (statController != null)
+        statController.SoulAmount -= amount;
+}
+
 }
