@@ -22,7 +22,7 @@ public class Fireball_Script : MonoBehaviour
     void Update()
     {
         lifetime += Time.deltaTime;
-        if (lifetime >= 10f) // Destroy the fireball after 5 seconds
+        if (lifetime >= 3f) // Destroy the fireball after 3 seconds
         {
             Destroy(gameObject);
         }

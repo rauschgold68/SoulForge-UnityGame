@@ -83,6 +83,10 @@ private void Start()
 
     public void Die()
 {
+    // Player-UI ausblenden
+        var uiScript = FindFirstObjectByType<UIScript>();
+        if (uiScript != null)
+            uiScript.hidePlayerUI();
     Debug.Log("Player has died. Game Over!");
     animator.SetBool("IsDead", true); // Death Animation
     GetComponent<Collider2D>().enabled = false;

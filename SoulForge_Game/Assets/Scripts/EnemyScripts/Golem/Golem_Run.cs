@@ -13,7 +13,7 @@ public class Golem_Run : StateMachineBehaviour
     // Random action selection
 
     // Probability to heal per frame while running (e.g., 2%)
-    private float healChancePerFrame = 0.0025f;
+    private float healChancePerFrame = 0.0008f;
     private bool isHealing = false;
 
     Transform player;

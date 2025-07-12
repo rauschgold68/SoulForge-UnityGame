@@ -44,32 +44,36 @@ public class HandleGameReset : MonoBehaviour
     /// Call this to fully reset the game: player, stats, and all enemies.
     /// </summary>
     public void CommenceGameReset()
-{
-    ResetPlayerPosition();
-    ResetPlayerStats();
-    RevivePlayer();
-    ReviveAllEnemies();
-    CullAllFireballs();
-    OpenDoor(door1);
-    
-    if (roomController != null)
-        roomController.ResetRoomStates();
+    {
+        RevivePlayer();
+        ResetPlayerPosition();
+        ResetPlayerStats();
+        ReviveAllEnemies();
+        CullAllFireballs();
+        OpenDoor(door1);
 
-    ResetAllRoomTriggers();
+        if (roomController != null)
+            roomController.ResetRoomStates();
+
+        ResetAllRoomTriggers();
         // Hide Lord BossBar
         var bossBar = FindAnyObjectByType<BossBar>();
         if (bossBar != null)
             bossBar.HideBar();
 
-    if (playerStatController?.playerHealth?.gameOverScreen != null)
-        playerStatController.playerHealth.gameOverScreen.SetActive(false);
+        if (playerStatController?.playerHealth?.gameOverScreen != null)
+            playerStatController.playerHealth.gameOverScreen.SetActive(false);
 
-    if (playerStatController?.playerHealth?.victoryScreen != null)
-        playerStatController.playerHealth.victoryScreen.SetActive(false);
+        if (playerStatController?.playerHealth?.victoryScreen != null)
+            playerStatController.playerHealth.victoryScreen.SetActive(false);
 
-    if (cardGameManager != null)
-    cardGameManager.ResetDeck(); // ← Kein Reload aus Resources
-
+        if (cardGameManager != null)
+            cardGameManager.ResetDeck(); // ← Kein Reload aus Resources
+    
+        // Player-UI ausblenden
+        var uiScript = FindFirstObjectByType<UIScript>();
+        if (uiScript != null)
+            uiScript.showPlayerUI();
 }
 
 

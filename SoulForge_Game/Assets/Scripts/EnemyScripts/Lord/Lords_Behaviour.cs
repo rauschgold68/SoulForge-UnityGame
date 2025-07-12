@@ -15,11 +15,11 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
     public bool isFlipped = false; // Flag to check if the enemy is flipped
     public Vector3 starterScale; // Scale to flip the enemy back to the original side
 
-    private int maxHealth = 1;
+    private int maxHealth = 1000;
     public int currentHealth;
     public int quickDamage = 20; // Damage dealt by the quick attack
-    public int heavyDamage = 50; // Damage dealt by the heavy attack
-    private float attackRangeQuick = 1f; // Range of the quick attack
+    public int heavyDamage = 40; // Damage dealt by the heavy attack
+    private float attackRangeQuick = 2f; // Range of the quick attack
     private float attackRangeHeavy = 3f; // Range of the heavy attack
     public bool lordDefeated = false; // Flag to check if the Lord of Darkness is defeated
 
