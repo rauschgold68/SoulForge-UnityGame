@@ -98,66 +98,79 @@ if (OnCardChosen != null)
         return;
     }
 
-    switch (cardName)
-    {
-        // Health Upgrades
-        case "HealthCard1":
-            cardController.AddHealthUpgrade("FirstUpgrade");
-            break;
-        case "HealthCard2":
-            cardController.AddHealthUpgrade("SecondUpgrade");
-            break;
-        case "HealthCard3":
-            cardController.AddHealthUpgrade("ThirdUpgrade");
-            break;
+        switch (cardName)
+        {
+            // Health Upgrades
+            case "HealthCard1":
+                cardController.AddHealthUpgrade("FirstUpgrade");
+                break;
+            case "HealthCard2":
+                cardController.AddHealthUpgrade("SecondUpgrade");
+                break;
+            case "HealthCard3":
+                cardController.AddHealthUpgrade("ThirdUpgrade");
+                break;
 
-        // Speed Upgrades
-        case "SpeedCard1":
-            cardController.AddSpeedUpgrade("FirstUpgrade");
-            break;
-        case "SpeedCard2":
-            cardController.AddSpeedUpgrade("SecondUpgrade");
-            break;
-        case "SpeedCard3":
-            cardController.AddSpeedUpgrade("ThirdUpgrade");
-            break;
+            // Speed Upgrades
+            case "SpeedCard1":
+                cardController.AddSpeedUpgrade("FirstUpgrade");
+                break;
+            case "SpeedCard2":
+                cardController.AddSpeedUpgrade("SecondUpgrade");
+                break;
+            case "SpeedCard3":
+                cardController.AddSpeedUpgrade("ThirdUpgrade");
+                break;
 
-        // Damage Upgrades
-        case "DamageCard1":
-            cardController.AddDamageUpgrade("FirstUpgrade");
-            break;
-        case "DamageCard2":
-            cardController.AddDamageUpgrade("SecondUpgrade");
-            break;
-        case "DamageCard3":
-            cardController.AddDamageUpgrade("ThirdUpgrade");
-            break;
+            // Damage Upgrades
+            case "DamageCard1":
+                cardController.AddDamageUpgrade("FirstUpgrade");
+                break;
+            case "DamageCard2":
+                cardController.AddDamageUpgrade("SecondUpgrade");
+                break;
+            case "DamageCard3":
+                cardController.AddDamageUpgrade("ThirdUpgrade");
+                break;
 
-        // Attack Range Upgrades
-        case "RangeCard1":
-            cardController.AddAttackRangeUpgrade("FirstUpgrade");
-            break;
-        case "RangeCard2":
-            cardController.AddAttackRangeUpgrade("SecondUpgrade");
-            break;
-        case "RangeCard3":
-            cardController.AddAttackRangeUpgrade("ThirdUpgrade");
-            break;
+            // Attack Range Upgrades
+            case "RangeCard1":
+                cardController.AddAttackRangeUpgrade("FirstUpgrade");
+                break;
+            case "RangeCard2":
+                cardController.AddAttackRangeUpgrade("SecondUpgrade");
+                break;
+            case "RangeCard3":
+                cardController.AddAttackRangeUpgrade("ThirdUpgrade");
+                break;
 
             // Attack Speed Upgrades
-        case "AttSpeedCard1":
-            cardController.AddAttackSpeedUpgrade("FirstUpgrade");
+            case "AttSpeedCard1":
+                cardController.AddAttackSpeedUpgrade("FirstUpgrade");
+                break;
+            case "AttSpeedCard2":
+                cardController.AddAttackSpeedUpgrade("SecondUpgrade");
+                break;
+            case "AttSpeedCard3":
+                cardController.AddAttackSpeedUpgrade("ThirdUpgrade");
+                break;
+
+                // Life Steal Upgrades
+        case "LifeStealCard1":
+            cardController.AddLifeStealUpgrade("FirstUpgrade");
             break;
-        case "AttSpeedCard2":
-            cardController.AddAttackSpeedUpgrade("SecondUpgrade");
+        case "LifeStealCard2":
+            cardController.AddLifeStealUpgrade("SecondUpgrade");
             break;
-        case "AttSpeedCard3":
-            cardController.AddAttackSpeedUpgrade("ThirdUpgrade");
+        case "LifeStealCard3":
+            cardController.AddLifeStealUpgrade("ThirdUpgrade");
             break;
 
-        default:
-            Debug.LogWarning("Kein Effekt für Karte: " + cardName);
-            break;
+            default:
+                Debug.LogWarning("Kein Effekt für Karte: " + cardName);
+                break;
+            
+        
     }
 }
 
