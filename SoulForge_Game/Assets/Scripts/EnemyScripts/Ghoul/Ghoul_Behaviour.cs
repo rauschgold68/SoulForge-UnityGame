@@ -45,7 +45,23 @@ public class Ghoul_Behaviour : MonoBehaviour, IEnemy
         else
         {
             isImmune = true;
-            immunityTimer = immunityDuration;
+            // Randomize immunity duration
+            float rand = Random.value;
+            if (rand < 0.1f)
+            {
+                // 10% chance: very short immunity (0–0.2s)
+                immunityTimer = Random.Range(0f, 0.2f);
+            }
+            else if (rand < 0.7f)
+            {
+                // 60% chance: medium immunity (40–80% of default)
+                immunityTimer = Random.Range(immunityDuration * 0.4f, immunityDuration * 0.8f);
+            }
+            else
+            {
+                // 30% chance: full default immunity
+                immunityTimer = immunityDuration;
+            }
             // Optionally trigger visual cue here
         }
     }

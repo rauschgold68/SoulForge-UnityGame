@@ -3,7 +3,7 @@ using UnityEngine;
 public class Golem_Run : StateMachineBehaviour
 {
     // Speed at which the Golem moves towards the player
-    private float speed = 3.5f;
+    private float speed = 2.6f;
     // Offset to maintain distance from the player during attack
     private float attackOffset = 2f;
     // Cooldown time between attacks (set dynamically)
@@ -13,7 +13,7 @@ public class Golem_Run : StateMachineBehaviour
     // Random action selection
 
     // Probability to heal per frame while running (e.g., 2%)
-    private float healChancePerFrame = 0.08f;
+    private float healChancePerFrame = 0.0025f;
     private bool isHealing = false;
 
     Transform player;
@@ -53,6 +53,11 @@ public class Golem_Run : StateMachineBehaviour
         float distanceToPlayer = Mathf.Abs(player.position.x - golemBody.position.x);
 
         // --- Healing logic while running ---
+        // Reset isHealing if Golem is not immune and not healing (so healing can trigger again)
+        if (!golemBehaviour.IsImmune() && isHealing)
+        {
+            isHealing = false;
+        }
         // Only heal if not already healing or immune
         if (!golemBehaviour.IsImmune() && !isHealing)
         {
