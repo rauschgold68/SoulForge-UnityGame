@@ -100,28 +100,15 @@ public class CardGameManager : MonoBehaviour
 
     private Card GetRandomCardByRarity()
     {
-        float roll = Random.Range(0f, 1f);
-
-        if (roll < 0.80f && HasCards(commonCards))
+        // Ziehe ausschließlich aus Common-Karten
+        if (HasCards(commonCards))
         {
             return GetRandomAvailableCardFromList(commonCards);
         }
-        else if (roll < 0.95f && HasCards(rareCards))
-        {
-            return GetRandomAvailableCardFromList(rareCards);
-        }
-        else if (HasCards(epicCards))
-        {
-            return GetRandomAvailableCardFromList(epicCards);
-        }
 
-        // Falls ausgewählte Kategorie leer, versuche andere Kategorien (Fallback)
-        if (HasCards(commonCards)) return GetRandomAvailableCardFromList(commonCards);
-        if (HasCards(rareCards)) return GetRandomAvailableCardFromList(rareCards);
-        if (HasCards(epicCards)) return GetRandomAvailableCardFromList(epicCards);
-
-        return null; // Keine Karten mehr verfügbar
+        return null; // Falls keine Common-Karten mehr verfügbar sind
     }
+
 
     private bool HasCards(List<Card> list)
     {
@@ -161,15 +148,17 @@ public class CardGameManager : MonoBehaviour
             Debug.Log("Karte zurückgegeben: " + card.Title);
         }
     }
-    
-    public void ResetDeck()
+
+    public void ResetDeck(bool reloadFromResources = true)
 {
     availableCards.Clear();
 
-    // Optional: Lade Karten neu aus Resources, falls sich Dateien im Laufzeitverzeichnis ändern könnten
-    commonCards = new List<Card>(Resources.LoadAll<Card>("Cards/Common"));
-    rareCards = new List<Card>(Resources.LoadAll<Card>("Cards/Rare"));
-    epicCards = new List<Card>(Resources.LoadAll<Card>("Cards/Epic"));
+    if (reloadFromResources)
+    {
+        commonCards = new List<Card>(Resources.LoadAll<Card>("Cards/Common"));
+        rareCards = new List<Card>(Resources.LoadAll<Card>("Cards/Rare"));
+        epicCards = new List<Card>(Resources.LoadAll<Card>("Cards/Epic"));
+    }
 
     availableCards.AddRange(commonCards);
     availableCards.AddRange(rareCards);
@@ -177,5 +166,15 @@ public class CardGameManager : MonoBehaviour
 
     Debug.Log("Kartendeck wurde zurückgesetzt.");
 }
+
+
+
+public void OverrideCommonCardsWith(List<Card> newCards)
+{
+    commonCards = new List<Card>(newCards);
+    ResetDeck(false); // kein Reload aus Resources!
+}
+
+
 
 }
