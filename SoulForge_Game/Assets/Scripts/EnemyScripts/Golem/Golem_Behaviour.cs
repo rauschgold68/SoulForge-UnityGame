@@ -17,7 +17,7 @@ public class Golem_Behaviour : MonoBehaviour, IEnemy
     private float attackRangeHeavy = 2f; // Range of the heavy attack
 
     private bool isImmune = false; // True if Golem is currently immune to damage
-    private float immunityDuration = 1.2f; // Duration of immunity in seconds
+    private float immunityDuration = 1.8f; // Duration of immunity in seconds
     private float immunityTimer = 0f; // Timer for tracking immunity
     private bool isHealing = false; // True if Golem is currently healing
 

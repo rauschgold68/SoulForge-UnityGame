@@ -12,7 +12,6 @@ public class Wizard_Behavior : MonoBehaviour, IEnemy
 
     // Immunity fields
     private bool isImmune = false; // True if Wizard is currently immune to damage
-    private float immunityTimer = 0f; // Timer for tracking immunity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,38 +33,36 @@ public class Wizard_Behavior : MonoBehaviour, IEnemy
         }
         else
         {
-            isImmune = true;
-            // Randomize immunity duration (max 0.4s for Wizard)
-            float rand = Random.value;
-            if (rand < 0.1f)
-            {
-                // 10% chance: very short immunity (0–0.05s)
-                immunityTimer = Random.Range(0f, 0.05f);
-            }
-            else if (rand < 0.7f)
-            {
-                // 60% chance: medium immunity (0.1–0.25s)
-                immunityTimer = Random.Range(0.1f, 0.25f);
-            }
-            else
-            {
-                // 30% chance: max 0.4s
-                immunityTimer = 0.4f;
-            }
+            // Start immunity coroutine with random short duration (max 0.4s)
+            StartCoroutine(ImmunityCoroutine());
         }
     }
 
-    void Update()
+    // No need for Update() for immunity anymore
+
+    private System.Collections.IEnumerator ImmunityCoroutine()
     {
-        // Handle immunity timer
-        if (isImmune)
+        isImmune = true;
+        // Wizard: shorter immunity than Golem (0.05s to 0.4s)
+        float rand = Random.value;
+        float duration;
+        if (rand < 0.1f)
         {
-            immunityTimer -= Time.deltaTime;
-            if (immunityTimer <= 0f)
-            {
-                isImmune = false;
-            }
+            // 10% chance: very short immunity (0.02–1.3s)
+            duration = Random.Range(0.8f, 1.3f);
         }
+        else if (rand < 0.7f)
+        {
+            // 60% chance: medium immunity (0.08–0.8s)
+            duration = Random.Range(0.08f, 0.8f);
+        }
+        else
+        {
+            // 30% chance: max 0.4s
+            duration = 0.4f;
+        }
+        yield return new WaitForSeconds(duration);
+        isImmune = false;
     }
 
     void Die()
