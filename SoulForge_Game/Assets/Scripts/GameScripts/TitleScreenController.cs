@@ -6,6 +6,7 @@ public class TitleScreenController : MonoBehaviour
     private GameObject player;
     private UIScript uiScript;
 
+
     void Start()
     {
         // Find TitleScreen automatically
