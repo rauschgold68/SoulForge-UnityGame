@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class UIScript : MonoBehaviour
 {
+
+    public GameObject playerUI; // Reference to the player UI GameObject
     // Macht das UI unsichtbar, wenn hidePlayerUI() aufgerufen wird
     public void hidePlayerUI()
     {
-        gameObject.SetActive(false);
+        playerUI.SetActive(false);
     }
 
     public void showPlayerUI()
     {
-        gameObject.SetActive(true);
+        playerUI.SetActive(true);
     }
 }

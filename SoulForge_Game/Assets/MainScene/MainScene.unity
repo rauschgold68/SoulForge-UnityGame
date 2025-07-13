@@ -13328,6 +13328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777546660}
   - component: {fileID: 777546659}
+  - component: {fileID: 777546661}
   m_Layer: 0
   m_Name: Map-Controlls
   m_TagString: Untagged
@@ -13372,6 +13373,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &777546661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777546658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b4e2d343de17c4b8b864f18be7dfcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUI: {fileID: 1258228059}
 --- !u!1 &782142648
 GameObject:
   m_ObjectHideFlags: 0
@@ -26371,7 +26385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You beat SoulForge by taking Lord's Soul!
+  m_text: You beat SoulForge by taking the Lord's Soul!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26398,8 +26412,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -28221,7 +28235,7 @@ Transform:
   m_GameObject: {fileID: 1130179737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.79, y: 1.27, z: 0}
+  m_LocalPosition: {x: -6.77, y: 1.27, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29234,6 +29248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b4e2d343de17c4b8b864f18be7dfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUI: {fileID: 0}
 --- !u!1 &1258516197
 GameObject:
   m_ObjectHideFlags: 0
@@ -29423,8 +29438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98587ecd930e81640ada929a7b526746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleScreen: {fileID: 0}
-  player: {fileID: 0}
 --- !u!4 &1266524397
 Transform:
   m_ObjectHideFlags: 0
@@ -39146,7 +39159,7 @@ Transform:
   m_GameObject: {fileID: 1463176162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.79, y: 1.27, z: -10}
+  m_LocalPosition: {x: -6.77, y: 1.27, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41241,7 +41254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1302723820812287101, guid: f82ea7649378eb045b8dc3ec670cdb60, type: 3}
+  m_Sprite: {fileID: 4798512763972418366, guid: 06cad5ead39582d4592d6ec0967b035a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -41819,7 +41832,7 @@ Transform:
   m_GameObject: {fileID: 1853537527}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.778, y: -0.186, z: 0}
+  m_LocalPosition: {x: -0.661, y: -0.217, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47706,7 +47719,7 @@ Transform:
   m_GameObject: {fileID: 1965661338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.79, y: 1.27, z: -10}
+  m_LocalPosition: {x: -6.77, y: 1.27, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

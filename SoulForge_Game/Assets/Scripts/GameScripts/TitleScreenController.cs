@@ -44,6 +44,6 @@ public class TitleScreenController : MonoBehaviour
         }
         // Enable UI
         if (uiScript != null)
-            uiScript.gameObject.SetActive(true);
+            uiScript.showPlayerUI();
     }
 }

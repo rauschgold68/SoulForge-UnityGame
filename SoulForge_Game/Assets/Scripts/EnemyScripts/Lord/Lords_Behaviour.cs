@@ -17,14 +17,14 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
 
     private int maxHealth = 1000;
     public int currentHealth;
-    public int quickDamage = 20; // Damage dealt by the quick attack
-    public int heavyDamage = 40; // Damage dealt by the heavy attack
-    private float attackRangeQuick = 2f; // Range of the quick attack
-    private float attackRangeHeavy = 3f; // Range of the heavy attack
+    public int quickDamage = 25; // Damage dealt by the quick attack
+    public int heavyDamage = 50; // Damage dealt by the heavy attack
+    private float attackRangeQuick = 3f; // Range of the quick attack
+    private float attackRangeHeavy = 4f; // Range of the heavy attack
     public bool lordDefeated = false; // Flag to check if the Lord of Darkness is defeated
 
     private bool isImmune = false; // Flag for immunity frames
-    private float immunityDuration = 1.5f; // Duration of immunity in seconds
+    private float immunityDuration = 2f; // Duration of immunity in seconds
     private float immunityTimer = 0f; // Timer for immunity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,7 +64,7 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
             // 10% chance: very short immunity (0–0.2s)
             immunityTimer = UnityEngine.Random.Range(0f, 0.2f);
         }
-        else if (rand < 0.7f)
+        else if (rand < 0.4f)
         {
             // 60% chance: medium immunity (40–80% of default)
             immunityTimer = UnityEngine.Random.Range(immunityDuration * 0.4f, immunityDuration * 0.8f);
@@ -189,8 +189,8 @@ public class Lords_Behaviour : MonoBehaviour, IEnemy
         if (attackPointQuick && attackPointHeavy != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPointQuick.position, 1.3f);
-            Gizmos.DrawWireSphere(attackPointHeavy.position, 2.7f);
+            Gizmos.DrawWireSphere(attackPointQuick.position, 2.5f);
+            Gizmos.DrawWireSphere(attackPointHeavy.position, 3.5f);
         }
     }
 
