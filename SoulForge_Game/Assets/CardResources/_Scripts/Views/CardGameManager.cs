@@ -157,7 +157,7 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
-    public void ResetDeck(bool reloadFromResources = true)
+    public void ResetDeck(bool reloadFromResources)
 {
     availableCards.Clear();
 

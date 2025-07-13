@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour, IPlayer
     private int _currentHealth;
 
     // --- Soul Stats ---
-    private int _soulAmount = 0;
+    private int _soulAmount = 0; // Total souls collected
     private int _soulsThisRound = 0;
 
 

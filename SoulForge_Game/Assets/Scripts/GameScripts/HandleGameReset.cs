@@ -68,7 +68,7 @@ public class HandleGameReset : MonoBehaviour
             playerStatController.playerHealth.victoryScreen.SetActive(false);
 
         if (cardGameManager != null)
-            cardGameManager.ResetDeck(); // ← Kein Reload aus Resources
+            cardGameManager.ResetDeck(false); // ← Kein Reload aus Resources
     
         // Player-UI ausblenden
         var uiScript = FindFirstObjectByType<UIScript>();
@@ -93,6 +93,14 @@ public class HandleGameReset : MonoBehaviour
             playerStatController.AttackRange = 1.5f;
             playerStatController.MoveSpeed = 3f;
             playerStatController.SoulsThisRound = 0;
+
+
+            // Lifesteal reset
+            if (playerStatController.playerCombat != null)
+            {
+                playerStatController.playerCombat.LifeStealEnabled = false;
+                playerStatController.playerCombat.LifeStealUpgradeStage = "Default";
+            }
 
             if (playerStatController.playerCombat != null)
             {
