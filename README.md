@@ -16,7 +16,7 @@ This Unity game was developed for a university project in the module "Interactiv
 
 ## Visuals
 
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+https://github.com/user-attachments/assets/bed65b7e-1694-4200-a906-371a9f8e5026
 
 ## Contributors
 
