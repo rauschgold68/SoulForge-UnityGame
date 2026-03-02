@@ -83,7 +83,6 @@ private void Start()
 
     public void Die()
 {
-    // Player-UI ausblenden
         var uiScript = FindFirstObjectByType<UIScript>();
         if (uiScript != null)
             uiScript.hidePlayerUI();
@@ -99,20 +98,17 @@ private void Start()
 
     var combat = GetComponent<PlayerCombat>();
     if (combat != null) combat.enabled = false;
-
-    // Entferne den automatischen Reset:
-    // StartCoroutine(WaitAndResetGame());
 }
 
 
 private IEnumerator WaitAndResetGame()
 {
-    yield return new WaitForSeconds(2f); // 2 Sekunden warten
+    yield return new WaitForSeconds(2f); // Wait for 2 seconds before resetting the game
 
     if (gameResetHandler != null)
         gameResetHandler.CommenceGameReset();
     else
-        Debug.LogWarning("GameResetHandler wurde nicht gefunden!");
+        Debug.LogWarning("GameResetHandler not found. Cannot reset the game.");
 }
 
 

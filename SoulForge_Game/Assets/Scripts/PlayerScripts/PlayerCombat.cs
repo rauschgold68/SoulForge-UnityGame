@@ -12,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
 
     public LayerMask enemyLayers; // Layer mask to identify enemy layers
 
-    public CardController cardController; // Assign in Inspector or via code
+    public CardController cardController; // Assign in Inspector
 
     // ---Player Parameters ---
     private float _attackRange = 0.5f;

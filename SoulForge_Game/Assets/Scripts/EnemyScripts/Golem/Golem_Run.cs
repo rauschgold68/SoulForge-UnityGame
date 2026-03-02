@@ -103,14 +103,4 @@ public class Golem_Run : StateMachineBehaviour
             }
         }
     }
-
-    // Called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        // Cleanup or reset logic can go here if needed
-    }
 }
-
-// Utility method for Golem_Behaviour to check immunity
-// (Add this to Golem_Behaviour.cs)
-// public bool IsImmune() { return isImmune; }

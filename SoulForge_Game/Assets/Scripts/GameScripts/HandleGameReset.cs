@@ -168,7 +168,7 @@ public class HandleGameReset : MonoBehaviour
     public void OpenDoor(GameObject door)
 {
     if (door != null)
-        door.SetActive(false); // Set inactive = Tür offen
+        door.SetActive(false); // Set inactive = door open
 }
 
 

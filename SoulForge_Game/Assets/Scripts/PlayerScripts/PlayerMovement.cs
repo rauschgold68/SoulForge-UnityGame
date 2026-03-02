@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     if (!enabled)
     {
         movement = Vector2.zero;
-        rb.linearVelocity = Vector2.zero; // wichtig, um sofort anzuhalten
+        rb.linearVelocity = Vector2.zero; // important to stop momentum when disabling movement
         animator.SetFloat("moveSpeed", 0f);
     }
 }

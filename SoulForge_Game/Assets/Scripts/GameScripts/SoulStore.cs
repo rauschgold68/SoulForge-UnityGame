@@ -6,12 +6,10 @@ public class SoulStore : MonoBehaviour
     public int cardDeckUpgrade2Cost = 120;
 
     private StatController statController;
-    // private CardController cardController;
 
     void Awake()
     {
         statController = FindFirstObjectByType<StatController>();
-        // cardController = FindFirstObjectByType<CardController>();
     }
 
     private int GetSouls()
@@ -30,7 +28,6 @@ public class SoulStore : MonoBehaviour
         {
             statController.SoulAmount -= cardDeckUpgrade1Cost;
             Debug.Log("Card Deck Upgrade 1 purchased.");
-            // cardController.UpgradeCardDeck();
             return true;
         }
         return false;
@@ -42,7 +39,6 @@ public class SoulStore : MonoBehaviour
         {
             statController.SoulAmount -= cardDeckUpgrade2Cost;
             Debug.Log("Card Deck Upgrade 2 purchased.");
-            // cardController.UpgradeCardDeck();
             return true;
         }
         return false;

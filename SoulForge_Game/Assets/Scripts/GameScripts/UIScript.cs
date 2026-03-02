@@ -4,7 +4,7 @@ public class UIScript : MonoBehaviour
 {
 
     public GameObject playerUI; // Reference to the player UI GameObject
-    // Macht das UI unsichtbar, wenn hidePlayerUI() aufgerufen wird
+    // method to hide the player UI, can be called when the player dies or during certain game events
     public void hidePlayerUI()
     {
         playerUI.SetActive(false);
